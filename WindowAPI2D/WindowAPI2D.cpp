@@ -81,9 +81,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             //게임 처리
-            //게임 업데이트
-            //게임 그려줌
-            
         }
     }
 

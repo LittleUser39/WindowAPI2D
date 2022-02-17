@@ -13,6 +13,9 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
+
+#include "CSingleTon.h"
+#include "CCore.h"
 //STL
 #include <vector>
 #include <list>
@@ -24,3 +27,11 @@
 #define WINSTARTY	100
 #define WINSIZEX	1280	
 #define WINSIZEY	720
+
+//========================================
+//## 전역변수(인스턴스, 윈도우 핸들)	##
+//========================================
+
+extern HINSTANCE hInst;
+extern HWND hWnd;
+

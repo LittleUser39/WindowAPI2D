@@ -147,12 +147,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CCore.h" />
+    <ClInclude Include="CSingleTon.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="WindowAPI2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CCore.cpp" />
     <ClCompile Include="WindowAPI2D.cpp" />
   </ItemGroup>
   <ItemGroup>
