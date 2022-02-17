@@ -17,11 +17,16 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
+//_in_:SAL주석- 자주 사용되는 주석을 매번 적기보다 키워드로 작성함.
 // hinstance : 실행된 프로세스의 시작주소, 인스턴스 핸들
 //hPrevinstance : 이전에 실행된 인스턴스 핸들
 //ipcmdLince : 명령으로 입력된 프로그램의 인수
 //ncmdshow : 프로그램이 시작될 형태
 //이게 윈도우 실행 메인 함수
+
+//메인의 역할
+//1. 윈도우창 세팅 후 화면에 띄움
+//2. 메세지 루프
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, 
                      _In_opt_ HINSTANCE hPrevInstance,
                      _In_ LPWSTR    lpCmdLine,
@@ -198,14 +203,29 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         InvalidateRect(hWnd, NULL, false);
         break;
-    case WM_PAINT:
+    case WM_PAINT: //윈도우의 작업영역이 다시 그려져야 할때 실행됨
         {
             PAINTSTRUCT ps;
+            //device context 만들어서 id를 반환
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
            
+            HPEN hNewPen = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
+            HBRUSH hNewBrush = CreateSolidBrush(RGB(0, 255, 0));
+
+            HPEN hOldPen= (HPEN)SelectObject(hdc, hNewPen);
+            HBRUSH hOldBrush = (HBRUSH)SelectObject(hdc, hNewBrush);
+
             Ellipse(hdc, g_mousePos.x - 100, g_mousePos.y - 100, g_mousePos.x + 100, g_mousePos.y + 100);
             Rectangle(hdc, g_keyPos.x - 50, g_keyPos.y - 50, g_keyPos.x + 50, g_keyPos.y + 50);
+            
+            SelectObject(hdc, hOldPen);
+            SelectObject(hdc, hOldBrush);
+
+            DeleteObject(hNewPen);
+            DeleteObject(hNewBrush);
+            
+            
             EndPaint(hWnd, &ps);
         }
         break;
