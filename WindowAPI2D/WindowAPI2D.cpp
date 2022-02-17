@@ -8,6 +8,7 @@
 
 // 전역 변수:
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
+HWND hWnd;                                      // 현재 윈도우의 핸들값
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
@@ -54,15 +55,35 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // 단축키 내용을 리소스에서 가져오는 함수
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WINDOWAPI2D));
 
-    MSG msg;
+   
 
     // 기본 메시지 루프입니다:
-    while (GetMessage(&msg, nullptr, 0, 0))
+    //메세지 큐에서 메세지가 확인 될때까지 대기
+    // 메세지 큐에 msg.message == WM_Quit인 경우 false를 반환
+    //getmessage 함수는 메세지가 올때까지 대기, 메세지가 들어 왔다면 true 반환
+    //peekmessage 함수는 메세지가 없으면 false 있으면 true 반환
+    //게임 루프
+    // 이전 getmessage의 대기 상태 유지에서
+    //현재 peekmessage의 메세지가 없는 99.99% 상황에서 게임 상황을 처리
+    MSG msg;
+    while (TRUE)
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))//메세지가 단축키 메세지 인지 번역
+        if(PeekMessage(&msg, nullptr, 0, 0,PM_REMOVE)) //메세지가 없으면 게임 처리, 메세지가 있으면 메세지 처리
         {
-            TranslateMessage(&msg); //기본 메세지를 번역
-            DispatchMessage(&msg);  //메세지 순서대로 처리
+            if (WM_QUIT == msg.message) //종료키를 눌렀을 때 반복문을 아예 나가주는 것을 만들어 줘야함 
+                break;
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))//메세지가 단축키 메세지 인지 번역
+            {
+                TranslateMessage(&msg); //기본 메세지를 번역
+                DispatchMessage(&msg);  //메세지 순서대로 처리
+            }
+        }
+        else
+        {
+            //게임 처리
+            //게임 업데이트
+            //게임 그려줌
+            
         }
     }
 
@@ -113,7 +134,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
    //윈도우를 생성하는 함수
-   HWND hWnd = CreateWindowW(szWindowClass,szTitle,WINSTYLE,WINSTARTX,WINSTARTY,WINSIZEX,WINSIZEY,nullptr,nullptr,hInstance, nullptr);
+    hWnd = CreateWindowW(szWindowClass,szTitle,WINSTYLE,WINSTARTX,WINSTARTY,WINSIZEX,WINSIZEY,nullptr,nullptr,hInstance, nullptr);
    //(클래스 이름,윈도우 타이틀 string,윈도우 스타일,윈도우 시작X,윈도우 시작Y,윈도우 가로크기,윈도우 세로크기,부모윈도우,메뉴핸들,프로세스 인스턴스의 핸들, 추가 매개변수)
 
    if (!hWnd)
