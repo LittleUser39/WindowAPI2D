@@ -18,6 +18,7 @@
 #include "CSingleTon.h"
 #include "CCore.h"
 #include "CTimeManager.h"
+#include "CGameObject.h"
 //STL
 #include <vector>
 #include <list>

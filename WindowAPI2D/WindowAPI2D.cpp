@@ -160,6 +160,12 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    return TRUE;
 }
 
+// WndProc : 메세지를 운영체제에 전달한다. 강제로 운영체제가 호출함.
+// hWnd : 메세지가 어느 윈도우를 대상으로 전달되었는지 구분
+// message : 메세지 구분 번호
+// wParam : unsigned int 메세지의 매개변수 1
+// lParam : unsigned long 메세지의 매개변수 2
+
 //
 //  함수: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
@@ -171,70 +177,38 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 
-POINT g_mousePos = { 100,100 };
-POINT g_keyPos = { 0,720 };
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
     case WM_COMMAND:
-        {
-            int wmId = LOWORD(wParam);
-            // 메뉴 선택을 구문 분석합니다:
-            switch (wmId)
-            {
-            case IDM_ABOUT:
-                DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-                break;
-            case IDM_EXIT:
-                DestroyWindow(hWnd);
-                break;
-            default:
-                return DefWindowProc(hWnd, message, wParam, lParam);
-            }
-        }
-        break;
-    case WM_LBUTTONDOWN:
     {
-        //뒤에가 x좌표,앞에가 y좌표 ffff(hiword) ffff(loword)
-        g_mousePos.x = LOWORD(lParam);
-        g_mousePos.y = HIWORD(lParam);
-        InvalidateRect(hWnd, NULL, false);
+        int wmId = LOWORD(wParam);
+        // 메뉴 선택을 구문 분석합니다:
+        switch (wmId)
+        {
+        case IDM_ABOUT:
+            DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+            break;
+        case IDM_EXIT:
+            DestroyWindow(hWnd);
+            break;
+        default:
+            return DefWindowProc(hWnd, message, wParam, lParam);
+        }
     }
-    case WM_KEYDOWN:
-        switch (wParam)
-        {
-        case VK_LEFT:
-        case'A':
-            g_keyPos.x -= 10;
-            break;
-        case VK_RIGHT:
-        case'D':
-            g_keyPos.x += 10;
-            break;
-        case VK_UP:
-        case'W':
-            g_keyPos.y -= 10;
-            break;
-        case VK_DOWN:
-        case'S':
-            g_keyPos.y += 10;
-            break;
-        }
-        InvalidateRect(hWnd, NULL, false);
-        break;
-    case WM_PAINT: //윈도우의 작업영역이 다시 그려져야 할때 실행됨
-        {
-            PAINTSTRUCT ps;
-            //device context 만들어서 id를 반환
-            HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-           
-            EndPaint(hWnd, &ps);
-        }
-        break;
-    case WM_DESTROY:
-        PostQuitMessage(0);
+    break;
+    case WM_PAINT:      // 윈도우의 작업영역이 다시 그려져야 할 때 실행됨. (무효화 영역이 발생 했을 떄)
+    {
+        PAINTSTRUCT ps;
+        // Device Context 만들어서 ID 를 반환
+        HDC hdc = BeginPaint(hWnd, &ps);
+        // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+        EndPaint(hWnd, &ps);
+    }
+    break;
+    case WM_DESTROY:    // 윈도우가 종료될 떄 실행됨.
+        PostQuitMessage(0);     // 메세지 큐에 WM_QUIT 입력
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);

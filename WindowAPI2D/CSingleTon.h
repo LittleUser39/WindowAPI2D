@@ -39,8 +39,8 @@ protected:
 	//싱글톤 인스턴스 선언하기
 	static T* _instance;
 
-	SingleTon();
-	~SingleTon();
+	SingleTon(){};
+	~SingleTon(){};
 public:
 	static T* getInst()
 	{
