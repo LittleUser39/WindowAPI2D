@@ -27,8 +27,8 @@ public:												\
 		return &_instance;							\
 	}												\
 private:											\
-	type(){}										\
-	~type(){}										
+	type();									\
+	~type();										
 
 
 // ΩÃ±€≈Ê ≈¨∑°Ω∫ ¡§¿«
@@ -39,8 +39,8 @@ protected:
 	//ΩÃ±€≈Ê ¿ŒΩ∫≈œΩ∫ º±æ«œ±‚
 	static T* _instance;
 
-	SingleTon() {};
-	~SingleTon() {};
+	SingleTon() ;
+	~SingleTon() ;
 
 public:
 	static T* getInst()

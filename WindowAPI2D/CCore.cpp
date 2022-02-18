@@ -1,5 +1,13 @@
-#include "CCore.h"
 #include "framework.h"
+#include "CCore.h"
+
+CCore::CCore()
+{
+}
+
+CCore::~CCore()
+{
+}
 
 void CCore::update()
 {
@@ -9,4 +17,9 @@ void CCore::update()
 void CCore::render()
 {
 	//todo: 게임 표현
+}
+
+void CCore::init()
+{
+	//
 }

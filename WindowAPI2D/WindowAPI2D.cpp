@@ -81,6 +81,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             //게임 처리
+            CCore::getInst()->update();
+            CCore::getInst()->render();
         }
     }
 
@@ -228,22 +230,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
            
-            HPEN hNewPen = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
-            HBRUSH hNewBrush = CreateSolidBrush(RGB(0, 255, 0));
-
-            HPEN hOldPen= (HPEN)SelectObject(hdc, hNewPen);
-            HBRUSH hOldBrush = (HBRUSH)SelectObject(hdc, hNewBrush);
-
-            Ellipse(hdc, g_mousePos.x - 100, g_mousePos.y - 100, g_mousePos.x + 100, g_mousePos.y + 100);
-            Rectangle(hdc, g_keyPos.x - 50, g_keyPos.y - 50, g_keyPos.x + 50, g_keyPos.y + 50);
-            
-            SelectObject(hdc, hOldPen);
-            SelectObject(hdc, hOldBrush);
-
-            DeleteObject(hNewPen);
-            DeleteObject(hNewBrush);
-            
-            
             EndPaint(hWnd, &ps);
         }
         break;

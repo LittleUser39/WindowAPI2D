@@ -14,8 +14,10 @@
 #include <memory.h>
 #include <tchar.h>
 
+#include "struct.h"
 #include "CSingleTon.h"
 #include "CCore.h"
+#include "CTimeManager.h"
 //STL
 #include <vector>
 #include <list>
