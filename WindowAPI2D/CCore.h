@@ -5,8 +5,7 @@ class CCore
 {
 	SINGLETON(CCore);
 
-	CCore();
-	~CCore();
+	
 
 private:
 	HDC m_hDC;

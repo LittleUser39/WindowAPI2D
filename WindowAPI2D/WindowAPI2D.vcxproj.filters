@@ -56,6 +56,9 @@
     <ClCompile Include="CCore.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
+    <ClCompile Include="CTimeManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WindowAPI2D.rc">

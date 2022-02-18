@@ -158,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp" />
+    <ClCompile Include="CTimeManager.cpp" />
     <ClCompile Include="WindowAPI2D.cpp" />
   </ItemGroup>
   <ItemGroup>
