@@ -14,10 +14,11 @@
 #include <memory.h>
 #include <tchar.h>
 
-#include "struct.h"
+//내가 추가한거
 #include "CSingleTon.h"
 #include "CCore.h"
 #include "CTimeManager.h"
+#include "struct.h"
 #include "CGameObject.h"
 //STL
 #include <vector>

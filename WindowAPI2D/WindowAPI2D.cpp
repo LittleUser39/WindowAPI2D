@@ -65,6 +65,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     //게임 루프
     // 이전 getmessage의 대기 상태 유지에서
     //현재 peekmessage의 메세지가 없는 99.99% 상황에서 게임 상황을 처리
+    CCore::getInst()->init(); //이거 중요함 이거 코어 초기화 안해주면 아예 게임 자체가 안나옴
+
     MSG msg;
     while (TRUE)
     {
