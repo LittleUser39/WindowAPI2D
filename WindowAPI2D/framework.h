@@ -4,7 +4,7 @@
 
 #pragma once
 
-using namespace std;
+
 #include "targetver.h"
 #define WIN32_LEAN_AND_MEAN             // 거의 사용되지 않는 내용을 Windows 헤더에서 제외합니다.
 // Windows 헤더 파일
@@ -18,22 +18,13 @@ using namespace std;
 #include <vector>
 #include <list>
 #include <string>
-
-//내가 추가한거
-#include "CSingleTon.h"
-#include "struct.h"
-#include "CCore.h"
-#include "CTimeManager.h"
-#include "CGameObject.h"
-#include "CKeyManager.h"
-#include "CScene.h"
-
-
+using namespace std;
 
 //========================================
 //## 오브젝트 그룹						##
 //========================================
 //열거형 클래스
+//아니 이것도 저 해더들보다 위에 있어야함
 enum class GROUP_GAMEOBJ
 {
 	DEFAULT,
@@ -43,6 +34,15 @@ enum class GROUP_GAMEOBJ
 
 	SIZE,
 };
+
+//내가 추가한거
+#include "CSingleTon.h"
+#include "struct.h"
+#include "CCore.h"
+#include "CTimeManager.h"
+#include "CGameObject.h"
+#include "CKeyManager.h"
+#include "CScene.h"
 
 
 //========================================

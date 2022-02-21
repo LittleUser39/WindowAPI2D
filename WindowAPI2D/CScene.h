@@ -8,6 +8,7 @@ class CGameObject;
 
 class CScene
 {
+private:
 	vector<CGameObject*> m_arrObj[(int)GROUP_GAMEOBJ::SIZE];
 	wstring m_strName;
 	
@@ -22,6 +23,6 @@ public:
 	void SetName(const wstring& strName);	//이름 설정
 	wstring GetName();						//이름 가져오기
 
-	void AddObject(CGameObject* pObj, GROUP_GAMEOBJ Obj); // 씬에 오브젝트 추가 
+	void AddObject(CGameObject* pObj, GROUP_GAMEOBJ type); // 씬에 오브젝트 추가 
 };
 

@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "CScene.h"
+#include "CGameObject.h"
 
 CScene::CScene()
 {
@@ -48,7 +49,7 @@ wstring CScene::GetName()
 	return m_strName;
 }
 
-void CScene::AddObject(CGameObject* pObj, GROUP_GAMEOBJ Obj)
+void CScene::AddObject(CGameObject* pObj, GROUP_GAMEOBJ type)
 {
-	m_arrObj[(int)Obj].push_back(pObj);
+	m_arrObj[(int)type].push_back(pObj);
 }
