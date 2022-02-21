@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h" />
+    <ClInclude Include="CKeyManager.h" />
     <ClInclude Include="CSingleTon.h" />
     <ClInclude Include="CTimeManager.h" />
     <ClInclude Include="framework.h" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="CCore.cpp" />
     <ClCompile Include="CGameObject.cpp" />
+    <ClCompile Include="CKeyManager.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
     <ClCompile Include="WindowAPI2D.cpp" />
   </ItemGroup>

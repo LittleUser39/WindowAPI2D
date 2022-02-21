@@ -49,7 +49,7 @@ void CTimeManager::init()
 	// QueryPerformanceCount	: 좀 더 정교한 카운트 측정 함수
 
 	// 현재 카운트 갯수 확인
-	QueryPerformanceCounter(&m_llCurCount);
+	QueryPerformanceCounter(&m_llPrevCount);
 	// 초당 카운트 갯수 확인
 	QueryPerformanceFrequency(&m_llFrequency);
 }

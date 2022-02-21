@@ -24,27 +24,25 @@ void CCore::update()
 {
 	
 	CTimeManager::getInst()->update();
+	CKeyManager::getInst()->Update(); //여기서 키를 받아서 정확히 누른 시간에 키를 받아 움직임
 
 	fPoint pos = object.GetPos();
 	// GetAsuncKeyState : 메시지 큐에 키 입력을 받는 방식이 아닌 현재 상태의 키 입력상태를 확인
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+	if (KEY(VK_LEFT))
 	{
-		pos.x -= 100 * CTimeManager::getInst()->GetDT();
+		pos.x -= 100 * DT;
 	}
-
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+	if (KEY(VK_RIGHT))
 	{
-		pos.x += 100 * CTimeManager::getInst()->GetDT();
+		pos.x += 100 * DT;
 	}
-
-	if (GetAsyncKeyState(VK_UP) & 0x8000)
+	if (KEY(VK_UP))
 	{
-		pos.y -= 100 * CTimeManager::getInst()->GetDT();
+		pos.y -= 100 * DT;
 	}
-
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+	if (KEY(VK_DOWN))
 	{
-		pos.y += 100 * CTimeManager::getInst()->GetDT();
+		pos.y += 100 * DT;
 	}
 
 	object.SetPos(pos);
@@ -92,6 +90,8 @@ void CCore::init()
 {
 	//core의 초기화 과정
 	CTimeManager::getInst()->init();
+	CKeyManager::getInst()->Init();
+	
 
 	m_hDC = GetDC(hWnd);
 

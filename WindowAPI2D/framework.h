@@ -20,17 +20,25 @@
 #include "CTimeManager.h"
 #include "struct.h"
 #include "CGameObject.h"
+#include "CKeyManager.h"
 //STL
 #include <vector>
 #include <list>
 
-
+//#디파인문# 매크로
 
 #define WINSTYLE	 WS_CAPTION| WS_SYSMENU | WS_MINIMIZEBOX
 #define WINSTARTX	100
 #define WINSTARTY	100
 #define WINSIZEX	1280	
 #define WINSIZEY	720
+
+#define DT CTimeManager::getInst()->GetDT();	
+
+
+#define KEY(key)		CKeyManager::getInst()->GetButton(key)		//버튼이 눌림
+#define KEYUP(key)		CKeyManager::getInst()->GetButtonUP(key)	//업키
+#define KEYDOWN(key)	CKeyManager::getInst()->GetButtonDOWN(key)	//다운키
 
 //========================================
 //## 전역변수(인스턴스, 윈도우 핸들)	##

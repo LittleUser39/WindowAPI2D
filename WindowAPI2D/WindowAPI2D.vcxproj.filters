@@ -22,6 +22,9 @@
     <Filter Include="Util">
       <UniqueIdentifier>{0e27d34d-8733-4a73-bf2b-68b24eee7c61}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Manager">
+      <UniqueIdentifier>{50eb0146-c842-4f0a-a354-eba9805b0d0e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -45,11 +48,14 @@
     <ClInclude Include="struct.h">
       <Filter>Util</Filter>
     </ClInclude>
-    <ClInclude Include="CTimeManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CGameObject.h">
       <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimeManager.h">
+      <Filter>Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CKeyManager.h">
+      <Filter>Engine\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -59,11 +65,14 @@
     <ClCompile Include="CCore.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="CTimeManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CGameObject.cpp">
       <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimeManager.cpp">
+      <Filter>Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CKeyManager.cpp">
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
