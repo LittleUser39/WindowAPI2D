@@ -4,6 +4,7 @@
 
 #pragma once
 
+using namespace std;
 #include "targetver.h"
 #define WIN32_LEAN_AND_MEAN             // 거의 사용되지 않는 내용을 Windows 헤더에서 제외합니다.
 // Windows 헤더 파일
@@ -13,20 +14,40 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
-
-//내가 추가한거
-#include "CSingleTon.h"
-#include "CCore.h"
-#include "CTimeManager.h"
-#include "struct.h"
-#include "CGameObject.h"
-#include "CKeyManager.h"
 //STL
 #include <vector>
 #include <list>
+#include <string>
 
-//#디파인문# 매크로
+//내가 추가한거
+#include "CSingleTon.h"
+#include "struct.h"
+#include "CCore.h"
+#include "CTimeManager.h"
+#include "CGameObject.h"
+#include "CKeyManager.h"
+#include "CScene.h"
 
+
+
+//========================================
+//## 오브젝트 그룹						##
+//========================================
+//열거형 클래스
+enum class GROUP_GAMEOBJ
+{
+	DEFAULT,
+	PLAYER,
+	MONSTER,
+	MISSILE,
+
+	SIZE,
+};
+
+
+//========================================
+//## 디파인 매크로						##
+//========================================
 #define WINSTYLE	 WS_CAPTION| WS_SYSMENU | WS_MINIMIZEBOX
 #define WINSTARTX	100
 #define WINSTARTY	100

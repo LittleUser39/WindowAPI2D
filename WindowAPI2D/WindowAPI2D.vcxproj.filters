@@ -25,6 +25,12 @@
     <Filter Include="Engine\Manager">
       <UniqueIdentifier>{50eb0146-c842-4f0a-a354-eba9805b0d0e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{6617f9b3-4a2c-45bc-a596-6a12119231e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CSence">
+      <UniqueIdentifier>{979649d3-7e76-41dc-be64-ba8f1ea46d80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -48,14 +54,17 @@
     <ClInclude Include="struct.h">
       <Filter>Util</Filter>
     </ClInclude>
-    <ClInclude Include="CGameObject.h">
-      <Filter>Util</Filter>
-    </ClInclude>
     <ClInclude Include="CTimeManager.h">
       <Filter>Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CKeyManager.h">
       <Filter>Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene.h">
+      <Filter>Engine\CSence</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -65,14 +74,17 @@
     <ClCompile Include="CCore.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="CGameObject.cpp">
-      <Filter>Util</Filter>
-    </ClCompile>
     <ClCompile Include="CTimeManager.cpp">
       <Filter>Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CKeyManager.cpp">
       <Filter>Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene.cpp">
+      <Filter>Engine\CSence</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
