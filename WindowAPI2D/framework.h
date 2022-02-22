@@ -48,7 +48,6 @@ enum class GROUP_SCENE
 #include "struct.h"
 #include "CCore.h"
 #include "CTimeManager.h"
-#include "CGameObject.h"
 #include "CKeyManager.h"
 #include "CScene.h"
 #include "CSceneManager.h"
@@ -67,8 +66,8 @@ enum class GROUP_SCENE
 
 
 #define KEY(key)		CKeyManager::getInst()->GetButton(key)		//버튼이 눌림
-#define KEYUP(key)		CKeyManager::getInst()->GetButtonUP(key)	//업키
-#define KEYDOWN(key)	CKeyManager::getInst()->GetButtonDOWN(key)	//다운키
+#define KEYUP(key)		CKeyManager::getInst()->GetButtonUp(key)	//업키
+#define KEYDOWN(key)	CKeyManager::getInst()->GetButtonDown(key)	//다운키
 
 //========================================
 //## 전역변수(인스턴스, 윈도우 핸들)	##

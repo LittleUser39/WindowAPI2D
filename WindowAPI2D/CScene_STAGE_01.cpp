@@ -1,16 +1,15 @@
 #include "framework.h"
-#include "CScene_Start.h"
+#include "CScene_STAGE_01.h"
 #include "CGameObject.h"
-CScene_Start::CScene_Start()
+CScene_STAGE_01::CScene_STAGE_01()
 {
 }
 
-CScene_Start::~CScene_Start()
+CScene_STAGE_01::~CScene_STAGE_01()
 {
-	ClearObject();
 }
 
-void CScene_Start::Enter()
+void CScene_STAGE_01::Enter()
 {
 	CGameObject* obj = new CGameObject;
 
@@ -20,7 +19,7 @@ void CScene_Start::Enter()
 	AddObject(obj, GROUP_GAMEOBJ::DEFAULT);
 }
 
-void CScene_Start::Exit()
+void CScene_STAGE_01::Exit()
 {
 	ClearObject();
 }

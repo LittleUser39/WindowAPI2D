@@ -27,24 +27,6 @@ void CCore::update()
 	CKeyManager::getInst()->Update(); //여기서 키를 받아서 정확히 누른 시간에 키를 받아 움직임
 	CSceneManager::getInst()->Update();
 	
-	// GetAsuncKeyState : 메시지 큐에 키 입력을 받는 방식이 아닌 현재 상태의 키 입력상태를 확인
-	if (KEY(VK_LEFT))
-	{
-		
-	}
-	if (KEY(VK_RIGHT))
-	{
-		
-	}
-	if (KEY(VK_UP))
-	{
-		
-	}
-	if (KEY(VK_DOWN))
-	{
-		
-	}
-
 	
 }
 

@@ -61,7 +61,8 @@ void CScene::ClearObject()
 	{
 		for (int j = 0; j < m_arrObj[i].size(); j++)
 		{
-			delete m_arrObj[i][j];
+			delete m_arrObj[i][m_arrObj->size()-1];
+			m_arrObj->pop_back();
 		}
 	}
 }
