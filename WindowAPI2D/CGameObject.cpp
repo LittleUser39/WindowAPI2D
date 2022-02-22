@@ -15,6 +15,10 @@ CGameObject::~CGameObject()
 {
 }
 
+void CGameObject::Update()
+{
+}
+
 void CGameObject::Render(HDC hDc)
 {
 	

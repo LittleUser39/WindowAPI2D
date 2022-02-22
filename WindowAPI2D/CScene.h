@@ -17,12 +17,17 @@ public:
 	CScene();
 	~CScene();
 
-	void Update();
-	void Render(HDC hDc);
+	virtual void Update();
+	virtual void Render(HDC hDc);
+
+	virtual void Enter() = 0;	//장면에 들어갈때 - 장면마다 달라서 오버라이딩해서 사용 
+	virtual void Exit()  = 0;	//장면에서 나갈때 - 순수 가상함수 자식이 무조건 만들어야함
 
 	void SetName(const wstring& strName);	//이름 설정
 	wstring GetName();						//이름 가져오기
 
-	void AddObject(CGameObject* pObj, GROUP_GAMEOBJ type); // 씬에 오브젝트 추가 
+	void AddObject(CGameObject* pObj, GROUP_GAMEOBJ type); // 씬에 오브젝트 추가 (오브젝트,오브젝트가 어떤 그룹에 속하는가)
+protected:
+	void ClearObject();
 };
 

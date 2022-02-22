@@ -66,6 +66,12 @@
     <ClInclude Include="CScene.h">
       <Filter>Engine\CSence</Filter>
     </ClInclude>
+    <ClInclude Include="CSceneManager.h">
+      <Filter>Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene_Start.h">
+      <Filter>Engine\CSence</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowAPI2D.cpp">
@@ -84,6 +90,12 @@
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="CScene.cpp">
+      <Filter>Engine\CSence</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneManager.cpp">
+      <Filter>Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene_Start.cpp">
       <Filter>Engine\CSence</Filter>
     </ClCompile>
   </ItemGroup>

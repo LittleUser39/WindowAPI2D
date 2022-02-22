@@ -3,7 +3,11 @@
 
 CKeyManager::CKeyManager()
 {
-
+	for (int key = 0; key < VKEY_SIZE; key++)
+	{
+		m_arrPrevKey[key] = false;
+		m_arrCurKey[key] = false;
+	}
 }
 
 CKeyManager::~CKeyManager()

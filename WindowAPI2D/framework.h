@@ -34,7 +34,15 @@ enum class GROUP_GAMEOBJ
 
 	SIZE,
 };
+enum class GROUP_SCENE
+{
+	TOOL,
+	START,
+	STAGE_01,
+	STAGE_02,
 
+	SIZE,
+};
 //내가 추가한거
 #include "CSingleTon.h"
 #include "struct.h"
@@ -43,6 +51,7 @@ enum class GROUP_GAMEOBJ
 #include "CGameObject.h"
 #include "CKeyManager.h"
 #include "CScene.h"
+#include "CSceneManager.h"
 
 
 //========================================

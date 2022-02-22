@@ -25,7 +25,7 @@ void CCore::update()
 	
 	CTimeManager::getInst()->update();
 	CKeyManager::getInst()->Update(); //여기서 키를 받아서 정확히 누른 시간에 키를 받아 움직임
-
+	CSceneManager::getInst()->Update();
 	
 	// GetAsuncKeyState : 메시지 큐에 키 입력을 받는 방식이 아닌 현재 상태의 키 입력상태를 확인
 	if (KEY(VK_LEFT))
@@ -54,7 +54,7 @@ void CCore::render()
 
 	Rectangle(m_hMemDC, -1, -1, WINSIZEX + 1, WINSIZEY + 1);
 
-	
+	CSceneManager::getInst()->Render(m_hMemDC);
 
 	// 오른쪽 상단에 FPS 표시
 	WCHAR strFPS[6];
@@ -69,7 +69,7 @@ void CCore::init()
 	//core의 초기화 과정
 	CTimeManager::getInst()->init();
 	CKeyManager::getInst()->Init();
-	
+	CSceneManager::getInst()->Init();
 
 	m_hDC = GetDC(hWnd);
 
@@ -79,5 +79,4 @@ void CCore::init()
 	HBITMAP hOldBitmap =(HBITMAP) SelectObject(m_hMemDC, m_hBMP);
 	DeleteObject(hOldBitmap);
 
-	
 }
