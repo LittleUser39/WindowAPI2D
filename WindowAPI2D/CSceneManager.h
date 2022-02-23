@@ -16,6 +16,6 @@ public:
 	void Render(HDC hDc);				//장면을 그려줌 - 현재 보고있는 것만 그려줌
 	void Update();						//현재 장면만 업데이트 - 현재 보고있는 것만 업데이트
 
-	CScene* GetCurScene();	//현재 장면을 반환
+	CScene* GetCurScene();				//현재 장면을 반환 (그래서 cscene*로 반환)
 };
 

@@ -6,7 +6,7 @@ struct iPoint
 	int y;
 };
 
-struct fPoint
+struct fPoint	//좌표에 관한 값
 {
 	float x;
 	float y;
@@ -18,6 +18,24 @@ struct fPoint
 	}
 
 	fPoint(float x, float y)
+	{
+		this->x = x;
+		this->y = y;
+	}
+};
+
+struct fVec2	//방향성이 필요 - 방향성에 관한 값
+{
+	float x;
+	float y;
+
+	fVec2()
+	{
+		x = 0;
+		y = 0;
+	}
+
+	fVec2(float x, float y)
 	{
 		this->x = x;
 		this->y = y;
