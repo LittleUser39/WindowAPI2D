@@ -75,6 +75,15 @@
     <ClInclude Include="CScene_STAGE_01.h">
       <Filter>Engine\CSence</Filter>
     </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonster.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CMissile.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowAPI2D.cpp">
@@ -103,6 +112,15 @@
     </ClCompile>
     <ClCompile Include="CScene_STAGE_01.cpp">
       <Filter>Engine\CSence</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CMissile.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -27,6 +27,7 @@ CSceneManager::~CSceneManager()
 
 void CSceneManager::ChangeScene(GROUP_SCENE type)
 {
+	//다음 장면이 자신이면 그냥 리턴
 	if (m_arrScene[(int)type] == m_pCurScene)
 		return;
 	//현재 장면을 나가고 현재장면을 다음 장면으로 해준후 현재장면에 들어감
@@ -60,7 +61,7 @@ void CSceneManager::Render(HDC hDc)
 
 void CSceneManager::Update() 
 {
-	m_pCurScene->Update();
+	
 	if (KEYDOWN(VK_SPACE))
 	{
 		ChangeScene(GROUP_SCENE::STAGE_01);
@@ -69,5 +70,10 @@ void CSceneManager::Update()
 	{
 		ChangeScene(GROUP_SCENE::START);
 	}
-	
+	m_pCurScene->Update();
+}
+
+CScene* CSceneManager::GetCurScene()
+{
+	return m_pCurScene;
 }

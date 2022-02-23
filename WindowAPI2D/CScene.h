@@ -15,11 +15,12 @@ private:
 	
 public:
 	CScene();
-	~CScene();
+	virtual ~CScene();
 
 	virtual void Update();
 	virtual void Render(HDC hDc);
 
+	//
 	virtual void Enter() = 0;	//장면에 들어갈때 - 장면마다 달라서 오버라이딩해서 사용 
 	virtual void Exit()  = 0;	//장면에서 나갈때 - 순수 가상함수 자식이 무조건 만들어야함
 
@@ -28,6 +29,6 @@ public:
 
 	void AddObject(CGameObject* pObj, GROUP_GAMEOBJ type); // 씬에 오브젝트 추가 (오브젝트,오브젝트가 어떤 그룹에 속하는가)
 protected:
-	void ClearObject();
+	void ClearObject();		//그 장면에 있던 오브젝트들 삭제
 };
 

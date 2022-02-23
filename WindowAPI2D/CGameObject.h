@@ -8,10 +8,9 @@ private:
 
 public:
 	CGameObject();
-	CGameObject(fPoint pos, fPoint scale);
-	~CGameObject();
+	virtual ~CGameObject();	//virtual 하는 이유 부모 소멸자 말고 자식 소멸자를 사용하기 위해
 
-	virtual void Update() ;	//가상함수 - 상속받은 애가 오버라이딩해서 함수 이용 
+	virtual void Update() = 0;	//가상함수 - 상속받은 애가 오버라이딩해서 함수 이용 
 	virtual void Render(HDC hDc) ; //이게 오브젝트들을 그리는 함수 (매개변수 DC)
 
 	void SetPos(fPoint pos);		//해당 위치로 변경

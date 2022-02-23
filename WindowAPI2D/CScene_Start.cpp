@@ -1,26 +1,38 @@
 #include "framework.h"
 #include "CScene_Start.h"
 #include "CGameObject.h"
+#include "CPlayer.h"
+#include "CMonster.h"
 CScene_Start::CScene_Start()
 {
 }
 
 CScene_Start::~CScene_Start()
 {
-	ClearObject();
+	
 }
 
 void CScene_Start::Enter()
 {
-	CGameObject* obj = new CGameObject;
+	
 
-	obj->SetPos(fPoint(200, 200));
-	obj->SetScale(fPoint(100, 100));
+	//player 추가
+	CPlayer* pPlayer = new CPlayer;
 
-	AddObject(obj, GROUP_GAMEOBJ::DEFAULT);
+	pPlayer->SetPos(fPoint(500, 100));
+
+	AddObject(pPlayer, GROUP_GAMEOBJ::PLAYER);
+
+	//monster 추가
+	CMonster* pMonster = new CMonster;
+
+	pMonster->SetPos(fPoint(1100, 300));
+	pMonster->SetCenterPos(fPoint(pMonster->GetPos()));
+
+	AddObject(pMonster, GROUP_GAMEOBJ::MONSTER);
 }
 
 void CScene_Start::Exit()
 {
-	ClearObject();
+	
 }
