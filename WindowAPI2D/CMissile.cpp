@@ -32,3 +32,8 @@ fVec2 CMissile::GetDir()
 {
 	return m_fvDir;
 }
+void CMissile::SetDir(float theta)
+{
+	m_fvDir.x = (float)cos(theta); //좌우는 코사인
+	m_fvDir.y = (float)sin(theta); //위아래는 사인
+}

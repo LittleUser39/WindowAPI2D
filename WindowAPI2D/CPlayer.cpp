@@ -17,6 +17,9 @@ CPlayer::~CPlayer()
 void CPlayer::Update()
 {
 	fPoint pos = GetPos();
+	
+
+
 	if (KEY(VK_LEFT))
 	{
 		pos.x -= m_dVelocity * DT;
@@ -33,8 +36,8 @@ void CPlayer::Update()
 	{
 		pos.y += m_dVelocity * DT;
 	}
-	SetPos(pos);
 
+	SetPos(pos);
 	if (KEYDOWN('X'))
 	{
 		CreateMissile();
@@ -65,7 +68,7 @@ void CPlayer::CreateMissile()
 	//피타고라스 정리를 이용하여 대각선으로 발사
 	CMissile* pMisile2 = new CMissile;
 	pMisile2->SetPos(fptMissilPos);
-	pMisile2->SetDir(fVec2(WINSIZEX - fptMissilPos.x, 0 - fptMissilPos.y));
+	pMisile2->SetDir(8.145);
 	pCurScene = CSceneManager::getInst()->GetCurScene();
 	pCurScene->AddObject(pMisile2, GROUP_GAMEOBJ::MISSILE);
 }

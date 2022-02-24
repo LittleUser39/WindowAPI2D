@@ -21,4 +21,5 @@ public:
 
 	unsigned int GetFPS() { return m_uiFPS; }
 	double GetDT() {return m_dDT;}
+	float GetfDT() { return (float)m_dDT; }
 };

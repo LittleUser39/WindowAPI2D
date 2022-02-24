@@ -64,7 +64,8 @@ enum class GROUP_SCENE
 #define WINSIZEX	1280	
 #define WINSIZEY	720
 
-#define DT CTimeManager::getInst()->GetDT();	
+#define DT				CTimeManager::getInst()->GetDT();	
+#define fDT				CTimeManager::getInst()->GetfDT()
 
 
 #define KEY(key)		CKeyManager::getInst()->GetButton(key)		//버튼이 눌림
