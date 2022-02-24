@@ -84,6 +84,15 @@
     <ClInclude Include="CMissile.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="CBall.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CTextObj.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer2.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowAPI2D.cpp">
@@ -120,6 +129,15 @@
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="CMissile.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CBall.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CTextObj.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer2.cpp">
       <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>

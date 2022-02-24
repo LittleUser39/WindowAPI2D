@@ -19,6 +19,7 @@
 #include <list>
 #include <string>
 #include <math.h>
+#include <time.h>
 #define PHI 3.141592
 using namespace std;
 
@@ -53,6 +54,7 @@ enum class GROUP_SCENE
 #include "CKeyManager.h"
 #include "CScene.h"
 #include "CSceneManager.h"
+#include "CGameObject.h"
 
 
 //========================================

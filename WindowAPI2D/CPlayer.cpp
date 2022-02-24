@@ -56,19 +56,5 @@ void CPlayer::Render(HDC hDc)
 
 void CPlayer::CreateMissile()
 {
-	fPoint fptMissilPos = GetPos();
-	fptMissilPos.x += GetScale().x / 2.f;
-
-	CMissile* pMissile = new CMissile;
-	pMissile->SetPos(fptMissilPos);
-	pMissile->SetDir(fVec2(1,0));
-	CScene* pCurScene = CSceneManager::getInst()->GetCurScene();
-	pCurScene->AddObject(pMissile, GROUP_GAMEOBJ::MISSILE);
-
-	//피타고라스 정리를 이용하여 대각선으로 발사
-	CMissile* pMisile2 = new CMissile;
-	pMisile2->SetPos(fptMissilPos);
-	pMisile2->SetDir(8.145);
-	pCurScene = CSceneManager::getInst()->GetCurScene();
-	pCurScene->AddObject(pMisile2, GROUP_GAMEOBJ::MISSILE);
+	
 }
