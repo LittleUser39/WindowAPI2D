@@ -13,6 +13,6 @@ public:
 	virtual void Update();
 	
 	void SetDir(fVec2 vec);	//방향	세팅
-	fVec2 GetDir(fVec2 vec);			//방향 반환
+	fVec2 GetDir();			//방향 반환
 };
 

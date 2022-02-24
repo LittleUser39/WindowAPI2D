@@ -18,6 +18,8 @@
 #include <vector>
 #include <list>
 #include <string>
+#include <math.h>
+#define PHI 3.141592
 using namespace std;
 
 //========================================

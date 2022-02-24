@@ -40,4 +40,14 @@ struct fVec2	//방향성이 필요 - 방향성에 관한 값
 		this->x = x;
 		this->y = y;
 	}
+
+	fVec2 Nomarlize()
+	{
+		float z = sqrt(x * x + y * y);
+		
+		x = x / z;
+		y = y / z;
+
+		return *this;
+	}
 };
