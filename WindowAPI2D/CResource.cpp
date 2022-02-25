@@ -1,6 +1,14 @@
 #include "framework.h"
 #include "CResource.h"
 
+CResource::CResource()
+{
+}
+
+CResource::~CResource()
+{
+}
+
 void CResource::SetKey(const wstring& strKey)
 {
 	m_strKey = strKey;

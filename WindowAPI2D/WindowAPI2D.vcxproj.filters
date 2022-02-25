@@ -99,6 +99,12 @@
     <ClInclude Include="CTexture.h">
       <Filter>Resource\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="CPathManager.h">
+      <Filter>Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowAPI2D.cpp">
@@ -142,6 +148,9 @@
     </ClCompile>
     <ClCompile Include="CTexture.cpp">
       <Filter>Resource\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="CPathManager.cpp">
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

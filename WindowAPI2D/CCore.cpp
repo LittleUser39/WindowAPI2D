@@ -49,10 +49,11 @@ void CCore::render()
 void CCore::init()
 {
 	//core의 초기화 과정
+	CPathManager::getInst()->init(); //순서 - 이미지를 불러와서 씬에서 사용해야함
 	CTimeManager::getInst()->init();
 	CKeyManager::getInst()->Init();
 	CSceneManager::getInst()->Init();
-
+	
 	m_hDC = GetDC(hWnd);
 
 	m_hMemDC = CreateCompatibleDC(m_hDC);
