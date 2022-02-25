@@ -33,6 +33,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_ LPWSTR    lpCmdLine,
                      _In_ int       nCmdShow)
 {
+    //메모리 누수 체크
+    //메모리 누수가 된곳을 알려줌 (숫자로 알려줌)
+    //_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    //찾아낸 숫자로 그부분으로 가줌
+    //_CrtSetBreakAlloc(숫자);
+
     //무시해도 되는 매개변수 들
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
