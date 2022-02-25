@@ -2,16 +2,23 @@
 #include "CPlayer.h"
 #include "CScene.h"
 #include "CMissile.h"
-
+#include "CTexture.h"
 
 CPlayer::CPlayer()
 {
+	m_pTex = new CTexture();
+	wstring strFilePath = CPathManager::getInst()->GetContentPath();
+	strFilePath += L"\\texture\\Player.bmp";
+	m_pTex->Load(strFilePath);
+	
 	m_dVelocity = 100;
 	SetScale(fPoint(50, 50));
 }
 
 CPlayer::~CPlayer()
 {
+	if (nullptr != m_pTex)
+		delete m_pTex;
 }
 
 void CPlayer::Update()
@@ -47,11 +54,18 @@ void CPlayer::Update()
 
 void CPlayer::Render(HDC hDc)
 {
-	Rectangle(hDc,
-		(int)(GetPos().x -  GetScale().x / 2),
-		(int)(GetPos().y -  GetScale().y / 2),
-		(int)(GetPos().x +  GetScale().x / 2),
-		(int)(GetPos().y +  GetScale().y / 2));
+	//todo 플레이어 그림 그리기
+	int width = m_pTex->GetBmpWidth();
+	int height = m_pTex->GetBmpHeight();
+
+	//BitBlt(hDc, GetPos().x - width / 2.f, GetPos().y - height / 2.f, width, height, m_pTex->GetDC(), 0, 0, SRCCOPY);
+	TransparentBlt(hDc,
+		(int)(GetPos().x - (float)(width / 2)),
+		(int)(GetPos().y - (float)(height / 2)),
+		width, height,
+		m_pTex->GetDC(),
+		0, 0, width, height,
+		RGB(255, 0, 255));
 }
 
 void CPlayer::CreateMissile()

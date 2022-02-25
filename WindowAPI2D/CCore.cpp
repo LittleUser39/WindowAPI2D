@@ -63,3 +63,8 @@ void CCore::init()
 	DeleteObject(hOldBitmap);
 
 }
+
+HDC CCore::GetMainDC()
+{
+	return m_hDC;
+}

@@ -9,5 +9,7 @@ private:
 
 public:
 	void init();
+
+	const wchar_t* GetContentPath();
 };
 
