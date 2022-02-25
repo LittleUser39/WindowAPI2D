@@ -3,7 +3,7 @@
 
 CMissile::CMissile()
 {
-	m_fVelocity = 1000;
+	m_fVelocity = 300;
 	m_fvDir = fVec2(0,0);
 	SetScale(fPoint(10, 10));
 }
@@ -19,7 +19,7 @@ void CMissile::Update()
 	//todo 대각선을 구현하고 쏨 
 	pos.x += (float)m_fVelocity * m_fvDir.x * DT;
 	pos.y += (float)m_fVelocity * m_fvDir.y * DT;
-	
+		
 	SetPos(pos);
 }
 
