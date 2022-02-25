@@ -6,10 +6,7 @@
 
 CPlayer::CPlayer()
 {
-	m_pTex = new CTexture();
-	wstring strFilePath = CPathManager::getInst()->GetContentPath();
-	strFilePath += L"\\texture\\Player.bmp";
-	m_pTex->Load(strFilePath);
+	m_pTex = CResourceManager::getInst()->LoadTexture(L"PlayerTex",L"\\texture\\Player.bmp"); //로드된것은 playerTex로 이름이 정해짐(값도 정해짐), 경로를 설정하고 파일(텍스쳐)골라줌 
 	
 	m_dVelocity = 100;
 	SetScale(fPoint(50, 50));
@@ -17,8 +14,7 @@ CPlayer::CPlayer()
 
 CPlayer::~CPlayer()
 {
-	if (nullptr != m_pTex)
-		delete m_pTex;
+	
 }
 
 void CPlayer::Update()

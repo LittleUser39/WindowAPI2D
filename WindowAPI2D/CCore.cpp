@@ -64,7 +64,7 @@ void CCore::init()
 
 }
 
-HDC CCore::GetMainDC()
+HDC CCore::GetMainDC()	
 {
-	return m_hDC;
+	return m_hMemDC; //메모리 dc에 그려야함 
 }

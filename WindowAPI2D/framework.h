@@ -19,6 +19,7 @@
 #include <list>
 #include <string>
 #include <math.h>
+#include <map>
 #include <assert.h>
 #include "Logger.h"
 #define PHI 3.141592
@@ -56,6 +57,7 @@ enum class GROUP_SCENE
 #include "CScene.h"
 #include "CSceneManager.h"
 #include "CPathManager.h"
+#include "CResourceManager.h"
 
 
 //========================================
