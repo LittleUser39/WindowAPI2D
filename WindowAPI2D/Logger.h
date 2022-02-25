@@ -41,4 +41,4 @@ public:
 	{
 		log(L"[ERROR]", content);
 	}
-}; #pragma once
+};
