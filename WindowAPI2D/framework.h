@@ -74,6 +74,7 @@ enum  class TYPE_BRUSH
 #include "CSceneManager.h"
 #include "CPathManager.h"
 #include "CResourceManager.h"
+#include "CCollisionManager.h"
 
 
 //========================================

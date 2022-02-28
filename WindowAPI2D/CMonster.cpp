@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "CMonster.h"
+#include "CCollider.h"
 
 CMonster::CMonster()
 {
@@ -8,6 +9,8 @@ CMonster::CMonster()
 	m_fDistance = 200;
 	m_bIsUpDir	= true;
 
+	CreateCollider();
+	GetCollider()->SetScale(fPoint(200, 200));
 }
 
 CMonster::~CMonster()

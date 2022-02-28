@@ -25,6 +25,8 @@ public:
 	virtual void Enter() = 0;	//장면에 들어갈때 - 장면마다 달라서 오버라이딩해서 사용 
 	virtual void Exit()  = 0;	//장면에서 나갈때 - 순수 가상함수 자식이 무조건 만들어야함
 
+	const vector<CGameObject*>& GetGroupObject(GROUP_GAMEOBJ group);
+
 	void SetName(const wstring& strName);	//이름 설정
 	wstring GetName();						//이름 가져오기
 

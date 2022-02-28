@@ -50,6 +50,11 @@ void CScene::Render(HDC hDc)
 }
 
 
+const vector<CGameObject*>& CScene::GetGroupObject(GROUP_GAMEOBJ group)
+{
+	return m_arrObj[(UINT)group];
+}
+
 void CScene::SetName(const wstring& strName)
 {
 	m_strName = strName;

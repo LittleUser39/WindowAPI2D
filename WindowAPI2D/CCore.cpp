@@ -30,7 +30,7 @@ void CCore::update()
 	CTimeManager::getInst()->update();
 	CKeyManager::getInst()->Update(); //여기서 키를 받아서 정확히 누른 시간에 키를 받아 움직임
 	CSceneManager::getInst()->Update();
-	
+	CCollisionManager::getInst()->UPdate();
 	
 }
 
@@ -57,7 +57,8 @@ void CCore::init()
 	CTimeManager::getInst()->init();
 	CKeyManager::getInst()->Init();
 	CSceneManager::getInst()->Init();
-	
+	CCollisionManager::getInst()->init();
+
 	createBrushPen();
 
 	m_hDC = GetDC(hWnd);

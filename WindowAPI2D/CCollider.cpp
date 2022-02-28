@@ -4,9 +4,27 @@
 
 #include "SelectGDI.h"
 
+UINT CCollider::s_iID = 0;
+
 CCollider::CCollider()
 {
 	m_pOwner = nullptr;
+	m_iID = s_iID++;  //교유한 키값
+	m_fptOffsetPos = {};
+	m_fptFinalPos = {};
+	m_fptScale = {};
+
+	
+
+}
+
+CCollider::CCollider(const CCollider& other)
+{
+	m_pOwner = nullptr;
+	m_fptOffsetPos = other.m_fptOffsetPos;
+	m_fptFinalPos = other.m_fptFinalPos;
+	m_fptScale = other.m_fptScale;
+	m_iID = s_iID++;
 }
 
 CCollider::~CCollider()
@@ -27,6 +45,11 @@ fPoint CCollider::GetFinalPos()
 fPoint CCollider::GetScale()
 {
 	return m_fptScale;
+}
+
+UINT CCollider::Getid()
+{
+	return m_iID;
 }
 
 fPoint CCollider::SetOffsetPos(fPoint offset)
@@ -63,4 +86,18 @@ void CCollider::Render(HDC hDc)
 
 	
 
+}
+
+void CCollider::OnCollision(CCollider* pOther)
+{
+}
+
+void CCollider::OnCollisionEnter(CCollider* pOther)
+{
+	
+}
+
+void CCollider::OnCollisionExit(CCollider* pOther)
+{
+	
 }
