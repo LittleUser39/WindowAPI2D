@@ -61,7 +61,9 @@ void CSceneManager::Render(HDC hDc)
 
 void CSceneManager::Update() 
 {
-	
+	m_pCurScene->Update();
+	m_pCurScene->finalUpdate();
+
 	if (KEYDOWN(VK_SPACE))
 	{
 		ChangeScene(GROUP_SCENE::STAGE_01);

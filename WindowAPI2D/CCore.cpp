@@ -16,6 +16,10 @@ CCore::~CCore()
 	DeleteObject(m_hMemDC);
 	DeleteObject(m_hBMP);
 
+	for (int i = 0; i < (int)TYPE_PEN::SIZE; i++)
+	{
+		DeleteObject (m_arrPen[i]);
+	}
 }
 
 
@@ -54,6 +58,8 @@ void CCore::init()
 	CKeyManager::getInst()->Init();
 	CSceneManager::getInst()->Init();
 	
+	createBrushPen();
+
 	m_hDC = GetDC(hWnd);
 
 	m_hMemDC = CreateCompatibleDC(m_hDC);
@@ -67,4 +73,26 @@ void CCore::init()
 HDC CCore::GetMainDC()	
 {
 	return m_hMemDC; //메모리 dc에 그려야함 
+}
+
+void CCore::createBrushPen()
+{
+	//brush
+	m_arrBrush[(int)TYPE_BRUSH::HOLLOW] = (HBRUSH)GetStockObject(HOLLOW_BRUSH);
+
+	//pen
+	m_arrPen[(int)TYPE_PEN::RED] = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
+	m_arrPen[(int)TYPE_PEN::GREEN] = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
+	m_arrPen[(int)TYPE_PEN::BLUE] = CreatePen(PS_SOLID, 1, RGB(0, 0, 255));
+
+}
+
+HPEN CCore::GetPen(TYPE_PEN pen)
+{
+	return m_arrPen[(int)pen];
+}
+
+HBRUSH CCore::GetABrush(TYPE_BRUSH brush)
+{
+	return m_arrBrush[(int)brush];
 }

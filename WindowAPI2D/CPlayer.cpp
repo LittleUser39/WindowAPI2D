@@ -3,13 +3,18 @@
 #include "CScene.h"
 #include "CMissile.h"
 #include "CTexture.h"
+#include "CCollider.h"
 
 CPlayer::CPlayer()
 {
 	m_pTex = CResourceManager::getInst()->LoadTexture(L"PlayerTex",L"\\texture\\Player.bmp"); //로드된것은 playerTex로 이름이 정해짐(값도 정해짐), 경로를 설정하고 파일(텍스쳐)골라줌 
 	
 	m_dVelocity = 100;
-	SetScale(fPoint(50, 50));
+	SetScale(fPoint(70.f, 70.f));
+
+	CreateCollider();
+	GetCollider()->SetScale(fPoint(40.f, 40.f));
+	GetCollider()->SetOffsetPos(fPoint(0.f, 10.f));
 }
 
 CPlayer::~CPlayer()
@@ -62,6 +67,8 @@ void CPlayer::Render(HDC hDc)
 		m_pTex->GetDC(),
 		0, 0, width, height,
 		RGB(255, 0, 255));
+
+	component_render(hDc);
 }
 
 void CPlayer::CreateMissile()

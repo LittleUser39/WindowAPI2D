@@ -22,6 +22,7 @@
 #include <map>
 #include <assert.h>
 #include "Logger.h"
+
 #define PHI 3.141592
 using namespace std;
 
@@ -45,6 +46,21 @@ enum class GROUP_SCENE
 	START,
 	STAGE_01,
 	STAGE_02,
+
+	SIZE,
+};
+enum class TYPE_PEN
+{
+	RED,
+	GREEN,
+	BLUE,
+
+	SIZE,
+};
+
+enum  class TYPE_BRUSH
+{
+	HOLLOW,
 
 	SIZE,
 };
