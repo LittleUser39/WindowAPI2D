@@ -4,9 +4,11 @@
 
 CMissile::CMissile()
 {
+	SetName(L"Missile");
 	m_fVelocity = 300;
 	m_fvDir = fVec2(0,0);
 	SetScale(fPoint(10, 10));
+
 	CreateCollider();	//中宜端 持失
 	GetCollider()->SetScale(fPoint(10, 10));
 }
@@ -24,6 +26,23 @@ void CMissile::Update()
 	pos.y += (float)m_fVelocity * m_fvDir.y * DT;
 		
 	SetPos(pos);
+	
+	
+}
+
+void CMissile::render(HDC hDc)
+{
+	fPoint pos = GetPos();
+	fPoint scale = GetScale();
+
+
+	Ellipse(hDc,
+		(int)(pos.x - scale.x / 2.f),
+		(int)(pos.y - scale.y / 2.f),
+		(int)(pos.x + scale.x / 2.f),
+		(int)(pos.y + scale.y / 2.f));
+
+	component_render(hDc);
 }
 
 void CMissile::SetDir(fVec2 vec)
@@ -34,6 +53,17 @@ void CMissile::SetDir(fVec2 vec)
 fVec2 CMissile::GetDir()
 {
 	return m_fvDir;
+}
+void CMissile::OnCollision(CCollider* pOther)
+{
+}
+void CMissile::OnCollisionEnter(CCollider* pOther)
+{
+	
+}
+void CMissile::OnCollisionExit(CCollider* pOther)
+{
+
 }
 void CMissile::SetDir(float theta)
 {

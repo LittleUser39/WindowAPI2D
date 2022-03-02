@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "CEventManager.h"
 #include "CScene.h"
-
+#include "CGameObject.h"
 CEventManager::CEventManager()
 {
 
@@ -25,9 +25,17 @@ void CEventManager::Execute(const tEvent& event)
 
 		CSceneManager::getInst()->GetCurScene()->AddObject(pObj, group);
 	}
-	break;
+		break;
 	case TYPE_EVENT::DELETE_OBJECT:
+	{
 		//delete object
+		//lparma 주소
+		//죽을 예정인 오브젝트 관리
+		//여기서 삭제는 아니고 설정과 지울 백터에 넣어줌
+		CGameObject* pObj = (CGameObject*)event.lparam;
+		pObj->SetDead();
+		m_vecDead.push_back(pObj);
+	}
 		break;
 	case TYPE_EVENT::CHANGE_SCENE:
 		//change scene
@@ -36,7 +44,16 @@ void CEventManager::Execute(const tEvent& event)
 }
 
 void CEventManager::Update()
-{
+{	
+	//여기서 죽은 오브젝트 삭제
+	//먼저 삭제후 이벤트 실행해야하여 위에 배치
+	for (int i = 0; i < m_vecDead.size(); i++)
+	{
+		delete m_vecDead[i];
+	}
+	m_vecDead.clear();
+
+	//이벤트 실행
 	for (int i = 0; i < m_vecEvent.size(); i++)
 	{
 		Execute(m_vecEvent[i]);
@@ -46,12 +63,23 @@ void CEventManager::Update()
 
 void CEventManager::AddEvent(const tEvent& event)
 {
+	m_vecEvent.push_back(event);
 }
 
 void CEventManager::EventCreateObject(CGameObject* pObj, GROUP_GAMEOBJ group)
 {
-	tEvent event;
+	tEvent event = {};
 	event.eEvent = TYPE_EVENT::CREATE_OBJECT;
 	event.lparam = (DWORD_PTR)pObj;
 	event.wparam = (DWORD_PTR)group;
+
+	AddEvent(event);
+}
+
+void CEventManager::EventDeleteObject(CGameObject* pObj)
+{
+	tEvent event = {};
+	event.eEvent = TYPE_EVENT::DELETE_OBJECT;
+	event.lparam = (DWORD_PTR)pObj;
+	AddEvent(event);
 }

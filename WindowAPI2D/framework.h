@@ -105,8 +105,8 @@ enum  class TYPE_BRUSH
 #define KEYUP(key)		CKeyManager::getInst()->GetButtonUp(key)	//업키
 #define KEYDOWN(key)	CKeyManager::getInst()->GetButtonDown(key)	//다운키
 
-#define CreateObj(pObj, group)	CEventManager::getInst()->EventCreateObject(pObj, group)
-
+#define CreateObj(obj, group)	CEventManager::getInst()->EventCreateObject(obj, group)
+#define DeleteObj(obj)			CEventManager::getInst()->EventDeleteObject(obj)
 //========================================
 //## 전역변수(인스턴스, 윈도우 핸들)	##
 //========================================

@@ -2,11 +2,17 @@
 #include "CGameObject.h"
 #include "CCollider.h"
 
+void CGameObject::SetDead()
+{
+	m_bAllive = false;
+}
+
 CGameObject::CGameObject()
 {
 	m_fptPos = {};
 	m_fptScale = {};
 	m_pCollider = nullptr;
+	m_bAllive = true;
 }
 
 CGameObject::~CGameObject()
@@ -59,11 +65,26 @@ void CGameObject::SetScale(fPoint scale)
 	m_fptScale = scale;
 }
 
+void CGameObject::SetName(wstring name)
+{
+	m_strName = name;
+}
+
+wstring CGameObject::GetName()
+{
+	return m_strName;
+}
+
 void CGameObject::CreateCollider()
 {
 	m_pCollider = new CCollider();
 	m_pCollider->m_pOwner = this;
 
+}
+
+bool CGameObject::isDead()
+{
+	return !m_bAllive;
 }
 
 fPoint CGameObject::GetPos()

@@ -24,6 +24,7 @@ public:
 
 	CCollider& operator=(CCollider& other) = delete; //함수를 사용할수 없게 막음
 
+	CGameObject* GetGameObject();
 	fPoint GetOffsetPos();
 	fPoint GetFinalPos();
 	fPoint GetScale();

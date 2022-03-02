@@ -15,5 +15,10 @@ public:
 	void SetCenterPos(fPoint point);	//중간 좌표 설정
 	fPoint GetCenterPos();		//중간 좌표 가져오기
 
+
+	//충돌 시점 함수
+	virtual void OnCollision(CCollider* pOther);
+	virtual void OnCollisionEnter(CCollider* pOther);
+	virtual void OnCollisionExit(CCollider* pOther);
 };
 

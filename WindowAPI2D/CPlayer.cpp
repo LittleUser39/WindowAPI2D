@@ -7,6 +7,7 @@
 
 CPlayer::CPlayer()
 {
+	SetName(L"Player");
 	m_pTex = CResourceManager::getInst()->LoadTexture(L"PlayerTex",L"\\texture\\Player.bmp"); //로드된것은 playerTex로 이름이 정해짐(값도 정해짐), 경로를 설정하고 파일(텍스쳐)골라줌 
 	
 	m_dVelocity = 100;
@@ -79,8 +80,24 @@ void CPlayer::CreateMissile()
 	CMissile* pMissile = new CMissile;
 	pMissile->SetPos(fptMissilPos);
 	pMissile->SetDir(fVec2(1,0));
-	CScene* pCurScene = CSceneManager::getInst()->GetCurScene();
-	pCurScene->AddObject(pMissile, GROUP_GAMEOBJ::MISSILE);
+
 
 	CreateObj(pMissile, GROUP_GAMEOBJ::MISSILE);
+
+}
+
+void CPlayer::OnCollision(CCollider* pOther)
+{
+}
+
+void CPlayer::OnCollisionEnter(CCollider* pOther)
+{
+	if (L"Monster" == pOther->GetGameObject()->GetName())
+	{
+		//몬스터랑 충돌
+	}
+}
+
+void CPlayer::OnCollisionExit(CCollider* pOther)
+{
 }

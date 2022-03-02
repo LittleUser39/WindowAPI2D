@@ -23,7 +23,8 @@ void CScene::Update()
 	{
 		for (int j = 0; j < m_arrObj[i].size(); j++)
 		{
-			m_arrObj[i][j]->Update();
+			if(!m_arrObj[i][j]->isDead())	//죽지않았으면 업데이트
+				m_arrObj[i][j]->Update();
 		}
 	}
 }
@@ -42,9 +43,17 @@ void CScene::Render(HDC hDc)
 {
 	for (int i = 0; i < (int)GROUP_GAMEOBJ::SIZE; i++)
 	{
-		for (int j = 0; j < m_arrObj[i].size(); j++)
+		for (vector<CGameObject*>::iterator iter = m_arrObj[i].begin(); iter != m_arrObj[i].end();)
 		{
-			m_arrObj[i][j]->Render(hDc);
+			if (false == (*iter)->isDead())	//죽지않은 오브젝트면 그려주고 아니면 삭제
+			{
+				(*iter)->Render(hDc);
+				iter++;
+			}
+			else
+			{
+				iter = m_arrObj[i].erase(iter);
+			}
 		}
 	}
 }

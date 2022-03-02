@@ -31,6 +31,11 @@ CCollider::~CCollider()
 
 }
 
+CGameObject* CCollider::GetGameObject()
+{
+	return m_pOwner;
+}
+
 fPoint CCollider::GetOffsetPos()
 {
 	return m_fptOffsetPos;
@@ -75,7 +80,7 @@ void CCollider::finalUpdate()
 void CCollider::Render(HDC hDc)
 {
 	TYPE_PEN pen_Color;
-	if (m_bIsCollsing)
+	if (m_iCollCount)
 		pen_Color = TYPE_PEN::RED;
 	else
 		pen_Color = TYPE_PEN::GREEN;
@@ -98,14 +103,12 @@ void CCollider::OnCollision(CCollider* pOther)		//충돌중
 
 void CCollider::OnCollisionEnter(CCollider* pOther)	//충돌에 들어감
 {
-	m_bIsCollsing = true;
-	/*m_pOwner->OnCollisionEnter(pOther);
-	m_iCollCount++;*/
+	m_pOwner->OnCollisionEnter(pOther);
+	m_iCollCount++;
 }
 
 void CCollider::OnCollisionExit(CCollider* pOther)	//충돌에 벗어남
 {
-	m_bIsCollsing = false;
-	/*m_pOwner->OnCollisionExit(pOther);
-	m_iCollCount--;*/
+	m_pOwner->OnCollisionExit(pOther);
+	m_iCollCount--;
 }

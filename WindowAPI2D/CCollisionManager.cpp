@@ -56,23 +56,45 @@ void CCollisionManager::CollisionGroupUpdate(GROUP_GAMEOBJ objLeft, GROUP_GAMEOB
 				//prev 0,cur 0 이전 프레임에 충돌 했는지 안했는지 
 				if (iter->second)
 				{
-					//이전과 현재 충돌 - 충돌중 vecleft[i]-충돌중, vecright[j]-충돌중
+					//충돌체 중 하나가 dead 상태라면 충돌 해제
+					if (vecLeft[i]->isDead() || vecRight[j]->isDead())
+					{
+						vecLeft[i]->GetCollider()->OnCollisionExit(vecRight[j]->GetCollider());
+						vecRight[j]->GetCollider()->OnCollisionExit(vecLeft[i]->GetCollider());
+						iter->second = false;
+					}
+					else
+					{
+						//이전과 현재 충돌 - 충돌중 vecleft[i]-충돌중, vecright[j]-충돌중
+						vecLeft[i]->GetCollider()->OnCollision(vecRight[j]->GetCollider());
+						vecRight[j]->GetCollider()->OnCollision(vecLeft[i]->GetCollider());
+						iter->second = true;
 
-					vecLeft[i]->GetCollider()->OnCollision(vecRight[j]->GetCollider());
-					vecRight[j]->GetCollider()->OnCollision(vecLeft[i]->GetCollider());
-					iter->second = true;
+					}
 				}
 				//prev x,cur 0
 				else
-				{
-					//이전 충돌 안함, 지금 충돌(현재) - 충돌 진입
-					vecLeft[i]->GetCollider()->OnCollisionEnter(vecRight[j]->GetCollider());
-					vecRight[j]->GetCollider()->OnCollisionEnter(vecLeft[i]->GetCollider());
-					iter->second = true;
+				{	
+					//충돌체 중 하나가 dead 상태라면 충돌 시키지 않음
+					if (vecLeft[i]->isDead() || vecRight[j]->isDead())
+					{
+							//아무것도 하지않음
+						iter->second = false;
+					}
+					else
+					{
+						//이전 충돌 안함, 지금 충돌(현재) - 충돌 진입
+						vecLeft[i]->GetCollider()->OnCollisionEnter(vecRight[j]->GetCollider());
+						vecRight[j]->GetCollider()->OnCollisionEnter(vecLeft[i]->GetCollider());
+						iter->second = true;
+
+					}
 				}
 			}
-			else//충돌안함
-			{	//prev 0, cur x
+			else
+			{	
+				//충돌안함
+				//prev 0, cur x
 				if (iter->second)
 				{
 					// 이전에 충돌 지금 충돌 안함 - 충돌 해제

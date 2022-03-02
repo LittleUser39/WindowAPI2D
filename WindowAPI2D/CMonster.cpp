@@ -4,6 +4,7 @@
 
 CMonster::CMonster()
 {
+	SetName(L"Monster");
 	SetScale(fPoint(100, 100));
 	m_fVelocity = 300;
 	m_fDistance = 200;
@@ -45,4 +46,16 @@ void CMonster::SetCenterPos(fPoint point)
 fPoint CMonster::GetCenterPos()
 {
 	return m_fptCenterPos;
+}
+
+void CMonster::OnCollision(CCollider* pOther)
+{
+}
+
+void CMonster::OnCollisionEnter(CCollider* pOther)
+{
+}
+
+void CMonster::OnCollisionExit(CCollider* pOther)
+{
 }
