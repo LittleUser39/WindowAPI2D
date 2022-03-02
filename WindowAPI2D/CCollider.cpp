@@ -13,9 +13,7 @@ CCollider::CCollider()
 	m_fptOffsetPos = {};
 	m_fptFinalPos = {};
 	m_fptScale = {};
-
-	
-
+	m_iCollCount = 0;
 }
 
 CCollider::CCollider(const CCollider& other)
@@ -25,6 +23,7 @@ CCollider::CCollider(const CCollider& other)
 	m_fptFinalPos = other.m_fptFinalPos;
 	m_fptScale = other.m_fptScale;
 	m_iID = s_iID++;
+	m_iCollCount = other.m_iCollCount;
 }
 
 CCollider::~CCollider()
@@ -75,29 +74,40 @@ void CCollider::finalUpdate()
 
 void CCollider::Render(HDC hDc)
 {
+	TYPE_PEN pen_Color;
+	if (m_iCollCount>0)
+	{
+		pen_Color = TYPE_PEN::RED;
+	}
+	else
+	{
+		pen_Color = TYPE_PEN::GREEN;
+	}
+
 	SelectGDI brush(hDc, TYPE_BRUSH::HOLLOW);
 	SelectGDI pen(hDc, TYPE_PEN::GREEN);
+
 
 	Rectangle(hDc,
 		(int)(m_fptFinalPos.x - m_fptScale.x / 2.f),
 		(int)(m_fptFinalPos.y - m_fptScale.y / 2.f),
 		(int)(m_fptFinalPos.x + m_fptScale.x / 2.f),
 		(int)(m_fptFinalPos.y + m_fptScale.y / 2.f));
-
-	
-
 }
 
-void CCollider::OnCollision(CCollider* pOther)
+void CCollider::OnCollision(CCollider* pOther)		//충돌중
 {
+	m_pOwner->OnCollision(pOther);
 }
 
-void CCollider::OnCollisionEnter(CCollider* pOther)
+void CCollider::OnCollisionEnter(CCollider* pOther)	//충돌에 들어감
 {
-	
+	m_pOwner->OnCollisionEnter(pOther);
+	m_iCollCount++;
 }
 
-void CCollider::OnCollisionExit(CCollider* pOther)
+void CCollider::OnCollisionExit(CCollider* pOther)	//충돌에 벗어남
 {
-	
+	m_pOwner->OnCollisionExit(pOther);
+	m_iCollCount--;
 }

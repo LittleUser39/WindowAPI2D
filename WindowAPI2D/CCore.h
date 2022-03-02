@@ -25,5 +25,5 @@ public:
 
 	void createBrushPen();
 	HPEN GetPen(TYPE_PEN pen);
-	HBRUSH GetABrush(TYPE_BRUSH brush);
+	HBRUSH GetBrush(TYPE_BRUSH brush);
 };

@@ -12,6 +12,9 @@ private:
 	fPoint m_fptOffsetPos;
 	fPoint m_fptFinalPos;
 	fPoint m_fptScale;
+	bool m_bIsCollsing;
+	int m_iCollCount; //충돌 중인 갯수;
+
 
 	UINT m_iID;		//충돌체의 고유한 id 값
 public:
@@ -34,8 +37,8 @@ public:
 	void Render(HDC hDc);
 
 	//충돌 시점 함수
-	void OnCollision(CCollider* pOther);
-	void OnCollisionEnter(CCollider* pOther);
-	void OnCollisionExit(CCollider* pOther);
+	virtual void OnCollision(CCollider* pOther);
+	virtual void OnCollisionEnter(CCollider* pOther);
+	virtual void OnCollisionExit(CCollider* pOther);
 };
 

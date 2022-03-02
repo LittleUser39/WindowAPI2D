@@ -28,6 +28,9 @@ public:
 	CCollider* GetCollider();		//가지고 있는 충돌체 넣어줌
 	void CreateCollider();			//충돌체를 만들어서 관리
 
+	virtual void OnCollision(CCollider* pOther){};
+	virtual void OnCollisionEnter(CCollider* pOther){};
+	virtual void OnCollisionExit(CCollider* pOther){};
 
 };
 

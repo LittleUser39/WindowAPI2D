@@ -8,6 +8,8 @@ CCore::CCore()
 	m_hDC = 0;
 	m_hBMP = 0;
 	m_hMemDC = 0;
+	m_arrPen[0] = 0;
+	m_arrBrush[0] = 0;
 }
 
 CCore::~CCore()
@@ -93,7 +95,7 @@ HPEN CCore::GetPen(TYPE_PEN pen)
 	return m_arrPen[(int)pen];
 }
 
-HBRUSH CCore::GetABrush(TYPE_BRUSH brush)
+HBRUSH CCore::GetBrush(TYPE_BRUSH brush)
 {
 	return m_arrBrush[(int)brush];
 }

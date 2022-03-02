@@ -19,15 +19,16 @@ void CCollisionManager::CollisionGroupUpdate(GROUP_GAMEOBJ objLeft, GROUP_GAMEOB
 	CScene* pCurScene = CSceneManager::getInst()->GetCurScene();		//현재장면에서 충돌 확인
 
 	const vector<CGameObject*>& vecLeft = pCurScene->GetGroupObject(objLeft); //현재장면의 왼쪽오브젝트 를 모두 갖는 벡터 
-	const vector<CGameObject*>& vecRight = pCurScene->GetGroupObject(objRight); //현재장면의 왼쪽오브젝트 를 모두 갖는 벡터 
+	const vector<CGameObject*>& vecRight = pCurScene->GetGroupObject(objRight); //현재장면의 오른쪽오브젝트 를 모두 갖는 벡터 
 	
 	for (int i = 0; i < vecLeft.size(); i++)
 	{
 		//충돌체 컴포넌트가 없는 경우 무시
 		if (nullptr == vecLeft[i]->GetCollider())
 			continue;
-		for (int j = 0; j < vecRight.size(); j++)
-		{
+		for (int j = 0; j < vecRight.size(); j++)	//오른쪽 오브젝트 만큼 반복
+		{	
+			//충돌체 컴포넌트가 없는 경우 무시
 			if (nullptr == vecRight[j]->GetCollider())
 				continue;
 			//자기자신과의 충돌 무시
@@ -94,6 +95,20 @@ void CCollisionManager::CollisionGroupUpdate(GROUP_GAMEOBJ objLeft, GROUP_GAMEOB
 
 bool CCollisionManager::IsCollision(CCollider* pLeftColl, CCollider* pRightColl) //충돌 여부를 확인하는함수 (현재 충돌중이다)
 {
+	//두 사각형의 중심에서 부터 끝까지의 거리를 더한값을 기준으로 거리가 크면 충돌x 거리가 작으면 충돌 o
+	//사각충돌
+	fPoint fptLeftPos = pLeftColl->GetFinalPos();
+	fPoint fptLeftScale = pLeftColl->GetScale();
+	
+	fPoint fptRightPos = pRightColl->GetFinalPos();
+	fPoint fptRightScale = pRightColl->GetScale();
+
+	if (abs((fptLeftPos.x-fptRightPos.x)<(fptLeftPos.x+fptRightPos.x)/2.f)
+		&& abs(fptLeftPos.y - fptRightPos.y) < (fptLeftPos.y + fptRightPos.y) / 2.f) 
+	{
+		return true;
+	}
+
 	return false;
 }
 
@@ -106,9 +121,9 @@ void CCollisionManager::UPdate()
 {
 	for (int iRow = 0; iRow < (UINT)GROUP_GAMEOBJ::SIZE; iRow++)
 	{
-		for (int iCol = 0; iCol < (UINT)GROUP_GAMEOBJ::SIZE; iCol++)
+		for (int iCol = iRow; iCol < (UINT)GROUP_GAMEOBJ::SIZE; iCol++)	//전부다 볼 필요 없이 위에서 본것은 패스
 		{
-			if (m_arrCheck[iRow] & (1 << iCol));
+			if (m_arrCheck[iRow] & (1 << iCol));	//해당 비트가 1인경우 해당 그룹 검사
 			{
 				// 충돌을 검사하는 두그룹
 				CollisionGroupUpdate((GROUP_GAMEOBJ)iRow, (GROUP_GAMEOBJ)iCol);	
@@ -147,7 +162,7 @@ void CCollisionManager::UnCheckGroup(GROUP_GAMEOBJ objLeft, GROUP_GAMEOBJ objRig
 	UINT iCol;	//렬
 
 	//더 작은 수를 행으로 둠
-	if ((UINT)objLeft < (UINT)objRight)
+	if ((UINT)objLeft > (UINT)objRight)
 	{
 		iRow = (UINT)objLeft;
 		iCol = (UINT)objRight;
