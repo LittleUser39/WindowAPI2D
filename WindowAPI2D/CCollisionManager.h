@@ -23,8 +23,8 @@ private:
 	void CollisionGroupUpdate(GROUP_GAMEOBJ objLeft, GROUP_GAMEOBJ objRight);
 	bool IsCollision(CCollider* pLeftColl, CCollider* pRightColl);		//충돌 여부를 확인하는함수
 public:
-	void init();
-	void UPdate();
+	void init();		//초기화
+	void UPdate();		//충돌 확인
 	
 	void CheckGroup(GROUP_GAMEOBJ objLeft, GROUP_GAMEOBJ objRight); //그룹간의 충돌 설정
 	void UnCheckGroup(GROUP_GAMEOBJ objLeft, GROUP_GAMEOBJ objRight);

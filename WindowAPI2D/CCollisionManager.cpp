@@ -16,7 +16,7 @@ CCollisionManager::~CCollisionManager()
 
 void CCollisionManager::CollisionGroupUpdate(GROUP_GAMEOBJ objLeft, GROUP_GAMEOBJ objRight)
 {
-	CScene* pCurScene = CSceneManager::getInst()->GetCurScene();		//현재씬을 가져옴
+	CScene* pCurScene = CSceneManager::getInst()->GetCurScene();		//현재장면에서 충돌 확인
 
 	const vector<CGameObject*>& vecLeft = pCurScene->GetGroupObject(objLeft); //현재장면의 왼쪽오브젝트 를 모두 갖는 벡터 
 	const vector<CGameObject*>& vecRight = pCurScene->GetGroupObject(objRight); //현재장면의 왼쪽오브젝트 를 모두 갖는 벡터 
@@ -47,6 +47,7 @@ void CCollisionManager::CollisionGroupUpdate(GROUP_GAMEOBJ objLeft, GROUP_GAMEOB
 				m_mapCollInfo.insert(make_pair(id.ID, false));
 				iter = m_mapCollInfo.find(id.ID);
 			}
+			
 			//충돌 처리
 			if (IsCollision(vecLeft[i]->GetCollider(), vecRight[j]->GetCollider())) //충돌을 했느냐
 			{
@@ -84,8 +85,6 @@ void CCollisionManager::CollisionGroupUpdate(GROUP_GAMEOBJ objLeft, GROUP_GAMEOB
 				else
 				{
 					//충돌 안해 *경축* 아무것도 안함
-					vecLeft[i]->GetCollider()->OnCollisionExit(vecRight[j]->GetCollider());
-					vecRight[j]->GetCollider()->OnCollisionExit(vecLeft[i]->GetCollider());
 					iter->second = false;
 				}
 			}
@@ -93,7 +92,7 @@ void CCollisionManager::CollisionGroupUpdate(GROUP_GAMEOBJ objLeft, GROUP_GAMEOB
 	}
 }
 
-bool CCollisionManager::IsCollision(CCollider* pLeftColl, CCollider* pRightColl) //충돌 여부를 확인하는함수
+bool CCollisionManager::IsCollision(CCollider* pLeftColl, CCollider* pRightColl) //충돌 여부를 확인하는함수 (현재 충돌중이다)
 {
 	return false;
 }
