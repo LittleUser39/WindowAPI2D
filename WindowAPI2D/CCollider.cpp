@@ -75,17 +75,13 @@ void CCollider::finalUpdate()
 void CCollider::Render(HDC hDc)
 {
 	TYPE_PEN pen_Color;
-	if (m_iCollCount>0)
-	{
+	if (m_bIsCollsing)
 		pen_Color = TYPE_PEN::RED;
-	}
 	else
-	{
 		pen_Color = TYPE_PEN::GREEN;
-	}
 
 	SelectGDI brush(hDc, TYPE_BRUSH::HOLLOW);
-	SelectGDI pen(hDc, TYPE_PEN::GREEN);
+	SelectGDI pen(hDc, pen_Color);
 
 
 	Rectangle(hDc,
@@ -102,12 +98,14 @@ void CCollider::OnCollision(CCollider* pOther)		//충돌중
 
 void CCollider::OnCollisionEnter(CCollider* pOther)	//충돌에 들어감
 {
-	m_pOwner->OnCollisionEnter(pOther);
-	m_iCollCount++;
+	m_bIsCollsing = true;
+	/*m_pOwner->OnCollisionEnter(pOther);
+	m_iCollCount++;*/
 }
 
 void CCollider::OnCollisionExit(CCollider* pOther)	//충돌에 벗어남
 {
-	m_pOwner->OnCollisionExit(pOther);
-	m_iCollCount--;
+	m_bIsCollsing = false;
+	/*m_pOwner->OnCollisionExit(pOther);
+	m_iCollCount--;*/
 }

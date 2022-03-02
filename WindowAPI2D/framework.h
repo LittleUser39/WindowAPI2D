@@ -49,6 +49,16 @@ enum class GROUP_SCENE
 
 	SIZE,
 };
+
+enum class TYPE_EVENT
+{
+	CREATE_OBJECT,
+	DELETE_OBJECT,
+	CHANGE_SCENE,
+
+	SIZE,
+};
+
 enum class TYPE_PEN
 {
 	RED,
@@ -75,6 +85,7 @@ enum  class TYPE_BRUSH
 #include "CPathManager.h"
 #include "CResourceManager.h"
 #include "CCollisionManager.h"
+#include "CEventManager.h"
 
 
 //========================================
@@ -93,6 +104,8 @@ enum  class TYPE_BRUSH
 #define KEY(key)		CKeyManager::getInst()->GetButton(key)		//버튼이 눌림
 #define KEYUP(key)		CKeyManager::getInst()->GetButtonUp(key)	//업키
 #define KEYDOWN(key)	CKeyManager::getInst()->GetButtonDown(key)	//다운키
+
+#define CreateObj(pObj, group)	CEventManager::getInst()->EventCreateObject(pObj, group)
 
 //========================================
 //## 전역변수(인스턴스, 윈도우 핸들)	##

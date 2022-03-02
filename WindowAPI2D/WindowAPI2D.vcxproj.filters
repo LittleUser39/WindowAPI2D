@@ -120,6 +120,9 @@
     <ClInclude Include="CCollisionManager.h">
       <Filter>Engine\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="CEventManager.h">
+      <Filter>Engine\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowAPI2D.cpp">
@@ -174,6 +177,9 @@
       <Filter>Engine\Component</Filter>
     </ClCompile>
     <ClCompile Include="CCollisionManager.cpp">
+      <Filter>Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CEventManager.cpp">
       <Filter>Engine\Manager</Filter>
     </ClCompile>
   </ItemGroup>

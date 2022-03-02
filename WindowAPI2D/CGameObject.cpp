@@ -4,6 +4,8 @@
 
 CGameObject::CGameObject()
 {
+	m_fptPos = {};
+	m_fptScale = {};
 	m_pCollider = nullptr;
 }
 

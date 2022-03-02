@@ -57,7 +57,7 @@ void CCollisionManager::CollisionGroupUpdate(GROUP_GAMEOBJ objLeft, GROUP_GAMEOB
 				if (iter->second)
 				{
 					//이전과 현재 충돌 - 충돌중 vecleft[i]-충돌중, vecright[j]-충돌중
-				
+
 					vecLeft[i]->GetCollider()->OnCollision(vecRight[j]->GetCollider());
 					vecRight[j]->GetCollider()->OnCollision(vecLeft[i]->GetCollider());
 					iter->second = true;
@@ -66,7 +66,6 @@ void CCollisionManager::CollisionGroupUpdate(GROUP_GAMEOBJ objLeft, GROUP_GAMEOB
 				else
 				{
 					//이전 충돌 안함, 지금 충돌(현재) - 충돌 진입
-					
 					vecLeft[i]->GetCollider()->OnCollisionEnter(vecRight[j]->GetCollider());
 					vecRight[j]->GetCollider()->OnCollisionEnter(vecLeft[i]->GetCollider());
 					iter->second = true;
@@ -103,8 +102,8 @@ bool CCollisionManager::IsCollision(CCollider* pLeftColl, CCollider* pRightColl)
 	fPoint fptRightPos = pRightColl->GetFinalPos();
 	fPoint fptRightScale = pRightColl->GetScale();
 
-	if (abs((fptLeftPos.x-fptRightPos.x)<(fptLeftPos.x+fptRightPos.x)/2.f)
-		&& abs(fptLeftPos.y - fptRightPos.y) < (fptLeftPos.y + fptRightPos.y) / 2.f) 
+	if (abs(fptLeftPos.x - fptRightPos.x) < (fptLeftScale.x + fptRightScale.x)/2.f	//이거 scale을 pos로 해서 오류가났음 이제 해결함
+		&& abs(fptLeftPos.y - fptRightPos.y) < (fptLeftScale.y + fptRightScale.y) / 2.f) 
 	{
 		return true;
 	}
@@ -117,16 +116,16 @@ void CCollisionManager::init()
 
 }
 
-void CCollisionManager::UPdate()
+void CCollisionManager::Update()
 {
-	for (int iRow = 0; iRow < (UINT)GROUP_GAMEOBJ::SIZE; iRow++)
+	for (UINT iRow = 0; iRow < (UINT)GROUP_GAMEOBJ::SIZE; iRow++)
 	{
-		for (int iCol = iRow; iCol < (UINT)GROUP_GAMEOBJ::SIZE; iCol++)	//전부다 볼 필요 없이 위에서 본것은 패스
+		for (UINT iCol = iRow; iCol < (UINT)GROUP_GAMEOBJ::SIZE; iCol++)
 		{
-			if (m_arrCheck[iRow] & (1 << iCol));	//해당 비트가 1인경우 해당 그룹 검사
+			if (m_arrCheck[iRow] & (1 << iCol))
 			{
-				// 충돌을 검사하는 두그룹
-				CollisionGroupUpdate((GROUP_GAMEOBJ)iRow, (GROUP_GAMEOBJ)iCol);	
+				// 충돌을 검사해야하는 두 그룹
+				CollisionGroupUpdate((GROUP_GAMEOBJ)iRow, (GROUP_GAMEOBJ)iCol);
 			}
 		}
 	}

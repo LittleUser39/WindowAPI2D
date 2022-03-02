@@ -4,13 +4,13 @@
 
 CMonster::CMonster()
 {
-	SetScale(fPoint(200, 200));
+	SetScale(fPoint(100, 100));
 	m_fVelocity = 300;
 	m_fDistance = 200;
 	m_bIsUpDir	= true;
 
 	CreateCollider();
-	GetCollider()->SetScale(fPoint(200, 200));
+	GetCollider()->SetScale(fPoint(100, 100));
 }
 
 CMonster::~CMonster()

@@ -82,5 +82,5 @@ void CPlayer::CreateMissile()
 	CScene* pCurScene = CSceneManager::getInst()->GetCurScene();
 	pCurScene->AddObject(pMissile, GROUP_GAMEOBJ::MISSILE);
 
-	
+	CreateObj(pMissile, GROUP_GAMEOBJ::MISSILE);
 }

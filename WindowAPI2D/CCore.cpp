@@ -28,11 +28,12 @@ CCore::~CCore()
 
 void CCore::update()
 {
-	
+	CEventManager::getInst()->Update();
+
 	CTimeManager::getInst()->update();
 	CKeyManager::getInst()->Update(); //여기서 키를 받아서 정확히 누른 시간에 키를 받아 움직임
 	CSceneManager::getInst()->Update();
-	CCollisionManager::getInst()->UPdate();
+	CCollisionManager::getInst()->Update();
 	
 }
 
