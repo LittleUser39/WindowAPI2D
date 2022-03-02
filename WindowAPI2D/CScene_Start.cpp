@@ -19,14 +19,14 @@ void CScene_Start::Enter()
 	//player 추가
 	CPlayer* pPlayer = new CPlayer;
 
-	pPlayer->SetPos(fPoint(500, 100));
+	pPlayer->SetPos(fPoint(WINSIZEX/2, 900));
 
 	AddObject(pPlayer, GROUP_GAMEOBJ::PLAYER);
 
 	//monster 추가
 	CMonster* pMonster = new CMonster;
 
-	pMonster->SetPos(fPoint(1100, 300));
+	pMonster->SetPos(fPoint(WINSIZEX/2, 200));
 	pMonster->SetCenterPos(fPoint(pMonster->GetPos()));
 
 	AddObject(pMonster, GROUP_GAMEOBJ::MONSTER);

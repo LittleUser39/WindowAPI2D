@@ -5,8 +5,8 @@
 CMonster::CMonster()
 {
 	SetScale(fPoint(200, 200));
-	m_fVelocity = 300;
-	m_fDistance = 200;
+	m_fVelocity = 300;	//框流老 加档
+	m_fDistance = 200;	//框流老 芭府
 	m_bIsUpDir	= true;
 
 	CreateCollider();

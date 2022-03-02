@@ -81,10 +81,10 @@ enum  class TYPE_BRUSH
 //## 디파인 매크로						##
 //========================================
 #define WINSTYLE	 WS_CAPTION| WS_SYSMENU | WS_MINIMIZEBOX
-#define WINSTARTX	100
-#define WINSTARTY	100
-#define WINSIZEX	1280	
-#define WINSIZEY	720
+#define WINSTARTX	 100	//윈도우 시작 위치
+#define WINSTARTY	 100	//윈도우 시작 위치
+#define WINSIZEX	 850	//창 가로	
+#define WINSIZEY	1000	//창 세로
 
 #define DT				CTimeManager::getInst()->GetDT();	
 #define fDT				CTimeManager::getInst()->GetfDT()
