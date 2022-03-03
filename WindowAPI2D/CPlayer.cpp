@@ -4,11 +4,11 @@
 #include "CMissile.h"
 #include "CTexture.h"
 #include "CCollider.h"
-
+#include "CAnimator.h"
 CPlayer::CPlayer()
 {
 	SetName(L"Player");
-	m_pTex = CResourceManager::getInst()->LoadTexture(L"PlayerTex",L"\\texture\\Player.bmp"); //로드된것은 playerTex로 이름이 정해짐(값도 정해짐), 경로를 설정하고 파일(텍스쳐)골라줌 
+	m_pTex = CResourceManager::getInst()->LoadTexture(L"PlayerTex",L"\\texture\\Animation\\Animation_Player.bmp"); //로드된것은 playerTex로 이름이 정해짐(값도 정해짐), 경로를 설정하고 파일(텍스쳐)골라줌 
 	
 	m_dVelocity = 100;
 	SetScale(fPoint(70.f, 70.f));
@@ -16,6 +16,10 @@ CPlayer::CPlayer()
 	CreateCollider();
 	GetCollider()->SetScale(fPoint(40.f, 40.f));
 	GetCollider()->SetOffsetPos(fPoint(0.f, 10.f));
+
+	CreateAnimator();
+	GetAnimator()->CreateAnimation(L"Right_Move", m_pTex, fPoint(0.f, 210.f), fPoint(70.f, 70.f), fPoint(70.f, 0.f), 0.5f, 3);
+	GetAnimator()->Play(L"Right_Move");
 }
 
 CPlayer::~CPlayer()
@@ -51,7 +55,7 @@ void CPlayer::Update()
 	{
 		CreateMissile();
 	}
-
+	GetAnimator()->Update();
 }
 
 void CPlayer::Render(HDC hDc)
@@ -60,14 +64,14 @@ void CPlayer::Render(HDC hDc)
 	int width = m_pTex->GetBmpWidth();
 	int height = m_pTex->GetBmpHeight();
 
-	//BitBlt(hDc, GetPos().x - width / 2.f, GetPos().y - height / 2.f, width, height, m_pTex->GetDC(), 0, 0, SRCCOPY);
-	TransparentBlt(hDc,
+	//그냥 그림
+	/*TransparentBlt(hDc,
 		(int)(GetPos().x - (float)(width / 2)),
 		(int)(GetPos().y - (float)(height / 2)),
 		width, height,
 		m_pTex->GetDC(),
 		0, 0, width, height,
-		RGB(255, 0, 255));
+		RGB(255, 0, 255));*/
 
 	component_render(hDc);
 }

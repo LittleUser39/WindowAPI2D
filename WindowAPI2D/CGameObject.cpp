@@ -1,13 +1,14 @@
 #include "framework.h"
 #include "CGameObject.h"
 #include "CCollider.h"
-
+#include "CAnimator.h"
 
 CGameObject::CGameObject()
 {
 	m_fptPos	= {};
 	m_fptScale	= {};
 	m_pCollider = nullptr;
+	m_pAnimator = nullptr;
 	m_bAlive	= true;
 }
 
@@ -17,15 +18,17 @@ CGameObject::CGameObject(const CGameObject& other)
 	m_fptPos	= other.m_fptPos;
 	m_fptScale	= other.m_fptScale;
 	m_bAlive	= true;
-
+	m_pCollider = nullptr;
+	m_pAnimator = nullptr;
 	if (nullptr != other.m_pCollider)	//복사하는 애가 충돌체가 있으면 충돌체를 새로만들고 넣어줌
 	{
 		m_pCollider = new CCollider(*other.m_pCollider);
 		m_pCollider->m_pOwner = this;
 	}
-	else
+	if (nullptr != other.m_pAnimator)
 	{
-		m_pCollider = nullptr;
+		m_pAnimator = new CAnimator(*other.m_pAnimator);
+		m_pAnimator->m_pOwner = this;
 	}
 }
 
@@ -34,6 +37,10 @@ CGameObject::~CGameObject()
 	if (nullptr != m_pCollider)
 	{
 		delete m_pCollider;
+	}
+	if (nullptr != m_pAnimator)
+	{
+		delete m_pAnimator;
 	}
 }
 
@@ -60,6 +67,10 @@ void CGameObject::Render(HDC hDc)
 
 void CGameObject::component_render(HDC hDc)
 {
+	if (nullptr != m_pAnimator)
+	{
+		m_pAnimator->Render(hDc);
+	}
 	if (nullptr != m_pCollider)
 	{
 		m_pCollider->Render(hDc);
@@ -91,6 +102,17 @@ void CGameObject::CreateCollider()
 	m_pCollider = new CCollider();
 	m_pCollider->m_pOwner = this;
 
+}
+
+CAnimator* CGameObject::GetAnimator()
+{
+	return m_pAnimator;
+}
+
+void CGameObject::CreateAnimator()
+{
+	m_pAnimator = new CAnimator();
+	m_pAnimator->m_pOwner = this;
 }
 
 bool CGameObject::isDead()

@@ -40,6 +40,17 @@ struct fPoint	//좌표에 관한 값
 	{
 		return fPoint(x - other.x, y - other.y);
 	}
+	template<typename T> 
+	fPoint operator*(T num)
+	{
+		return fPoint(x * num, y * num);
+	}
+	template<typename T>
+	fPoint operator/(T num)
+	{
+		assert(0 != num);
+		return fPoint(x / num, y / num);
+	}
 };
 
 struct fVec2	//방향성이 필요 - 방향성에 관한 값
