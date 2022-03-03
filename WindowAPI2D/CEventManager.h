@@ -22,9 +22,9 @@ private:
 public:
 	void Update();
 
-	void AddEvent(const tEvent& event); //이벤트 매니저의 대기열에 이벤트 추가
+	void AddEvent(const tEvent& event);							   //이벤트 매니저의 대기열에 이벤트 추가
 	void EventCreateObject(CGameObject* pObj,GROUP_GAMEOBJ group); //오브젝트 생성
 	void EventDeleteObject(CGameObject* pObj);					   //오브젝트 제거
-
+	void EventChangeScene(GROUP_SCENE scene);					   //장면 전환 이벤트
 };
 

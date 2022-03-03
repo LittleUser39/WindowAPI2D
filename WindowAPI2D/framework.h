@@ -107,6 +107,7 @@ enum  class TYPE_BRUSH
 
 #define CreateObj(obj, group)	CEventManager::getInst()->EventCreateObject(obj, group)
 #define DeleteObj(obj)			CEventManager::getInst()->EventDeleteObject(obj)
+#define ChangeScn(scene)		CEventManager::getInst()->EventChangeScene(scene)
 //========================================
 //## 전역변수(인스턴스, 윈도우 핸들)	##
 //========================================

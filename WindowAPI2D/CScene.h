@@ -32,6 +32,7 @@ public:
 
 	void AddObject(CGameObject* pObj, GROUP_GAMEOBJ type); // 씬에 오브젝트 추가 (오브젝트,오브젝트가 어떤 그룹에 속하는가)
 protected:
-	void ClearObject();		//그 장면에 있던 오브젝트들 삭제
+	void DeleteGroup(GROUP_GAMEOBJ group);		//해당 그룹만 지워줌
+	void DeleteAll();							//그 장면에 있던 오브젝트들 삭제
 };
 

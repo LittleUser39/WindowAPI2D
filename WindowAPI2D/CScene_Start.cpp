@@ -12,6 +12,16 @@ CScene_Start::~CScene_Start()
 	
 }
 
+void CScene_Start::Update()
+{
+	CScene::Update();
+
+	if (KEYDOWN(VK_SPACE))
+	{
+		ChangeScn(GROUP_SCENE::TOOL);
+	}
+}
+
 void CScene_Start::Enter()
 {
 
@@ -32,5 +42,6 @@ void CScene_Start::Enter()
 
 void CScene_Start::Exit()
 {
+	DeleteAll();
 	
 }

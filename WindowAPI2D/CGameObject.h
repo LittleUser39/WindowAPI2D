@@ -30,7 +30,7 @@ public:
 
 	bool isDead();					//생존확인
 
-	virtual void Update() = 0;			
+	virtual void Update() = 0;			//순수 가상함수 상속받았으면 무조건 해야함
 	virtual void finalUpdate() final;	
 	virtual void Render(HDC hDC);		//그리기
 	virtual void component_render(HDC hDC);		//컴포넌트 그리기

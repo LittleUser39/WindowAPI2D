@@ -123,6 +123,9 @@
     <ClInclude Include="CEventManager.h">
       <Filter>Engine\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="CScene_Tool.h">
+      <Filter>Engine\CSence</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowAPI2D.cpp">
@@ -181,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="CEventManager.cpp">
       <Filter>Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene_Tool.cpp">
+      <Filter>Engine\CSence</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

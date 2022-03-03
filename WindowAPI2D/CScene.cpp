@@ -81,14 +81,20 @@ void CScene::AddObject(CGameObject* pObj, GROUP_GAMEOBJ type)
 	m_arrObj[(int)type].push_back(pObj);
 }
 
-void CScene::ClearObject()
+void CScene::DeleteGroup(GROUP_GAMEOBJ group)
 {
-	for (int i = 0; i < (int)GROUP_GAMEOBJ::SIZE; i++)
+	for (int i = 0; i < m_arrObj[(UINT)group].size(); i++)
 	{
-		for (int j = 0; j < m_arrObj[i].size(); j++)
-		{
-			delete m_arrObj[i][m_arrObj->size()-1];
-			m_arrObj->pop_back();
-		}
+		delete m_arrObj[(UINT)group][i];
+	}
+	m_arrObj[(UINT)group].clear();
+}
+
+void CScene::DeleteAll()
+{
+	for (int i = 0; i < (UINT)GROUP_GAMEOBJ::SIZE; i++)
+	{
+		DeleteGroup((GROUP_GAMEOBJ)i);
 	}
 }
+

@@ -42,6 +42,11 @@ void CEventManager::Execute(const tEvent& event)
 		break;
 	case TYPE_EVENT::CHANGE_SCENE:
 		//change scene
+		//lparam : scene ±×·ì
+		GROUP_SCENE scene = (GROUP_SCENE)event.lparam;
+		CSceneManager::getInst()->ChangeScene(scene);
+
+
 		break;
 	}
 }
@@ -84,5 +89,13 @@ void CEventManager::EventDeleteObject(CGameObject* pObj)
 	tEvent event = {};
 	event.eEvent = TYPE_EVENT::DELETE_OBJECT;
 	event.lparam = (DWORD_PTR)pObj;
+	AddEvent(event);
+}
+
+void CEventManager::EventChangeScene(GROUP_SCENE scene)
+{
+	tEvent event = {};
+	event.eEvent = TYPE_EVENT::CHANGE_SCENE;
+	event.lparam = (DWORD_PTR)scene;
 	AddEvent(event);
 }
