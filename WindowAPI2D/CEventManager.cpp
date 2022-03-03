@@ -34,6 +34,8 @@ void CEventManager::Execute(const tEvent& event)
 		//죽을 예정인 오브젝트 관리
 		//여기서 삭제는 아니고 설정과 지울 백터에 넣어줌
 		CGameObject* pObj = (CGameObject*)event.lparam;
+		if(pObj->isDead()) //이거 없어서 미사일 오류남
+			break;
 		pObj->SetDead();
 		m_vecDead.push_back(pObj);
 	}

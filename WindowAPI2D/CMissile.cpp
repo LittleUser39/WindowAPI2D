@@ -5,7 +5,7 @@
 CMissile::CMissile()
 {
 	SetName(L"Missile");
-	m_fVelocity = 300;
+	m_fVelocity = 100;
 	m_fvDir = fVec2(0,0);
 	SetScale(fPoint(20.f, 20.f));
 
@@ -27,10 +27,10 @@ void CMissile::Update()
 		
 	SetPos(pos);
 	
-	//일단 이거때문에 오류 
-	/*if (pos.x < 0 || pos.x > WINSIZEX
+	
+	if (pos.x < 0 || pos.x > WINSIZEX
 		|| pos.y < 0 || pos.y > WINSIZEY)
-		DeleteObj(this);*/
+		DeleteObj(this);
 }
 
 void CMissile::render(HDC hDc)
@@ -59,7 +59,11 @@ void CMissile::OnCollision(CCollider* pOther)
 }
 void CMissile::OnCollisionEnter(CCollider* pOther)
 {
-	
+	CGameObject* pOtherObj = pOther->GetGameObject();
+	if (pOtherObj->GetName() == L"Monster")
+	{
+		DeleteObj(this);
+	}
 }
 void CMissile::OnCollisionExit(CCollider* pOther)
 {
