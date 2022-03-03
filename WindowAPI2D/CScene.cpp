@@ -23,8 +23,10 @@ void CScene::Update()
 	{
 		for (int j = 0; j < m_arrObj[i].size(); j++)
 		{
-			if(!m_arrObj[i][j]->isDead())	//죽지않았으면 업데이트
+			if (!m_arrObj[i][j]->isDead())	//죽지않았으면 업데이트
+			{
 				m_arrObj[i][j]->Update();
+			}
 		}
 	}
 }
@@ -43,9 +45,10 @@ void CScene::Render(HDC hDc)
 {
 	for (int i = 0; i < (int)GROUP_GAMEOBJ::SIZE; i++)
 	{
-		for (vector<CGameObject*>::iterator iter = m_arrObj[i].begin(); iter != m_arrObj[i].end();)
+		for (vector<CGameObject*>::iterator iter = m_arrObj[i].begin(); 
+			iter != m_arrObj[i].end();)
 		{
-			if (false == (*iter)->isDead())	//죽지않은 오브젝트면 그려주고 아니면 삭제
+			if(!(*iter)->isDead())	//죽지않은 오브젝트면 그려주고 아니면 삭제
 			{
 				(*iter)->Render(hDc);
 				iter++;

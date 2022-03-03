@@ -1,7 +1,8 @@
 #include "framework.h"
 #include "CEventManager.h"
-#include "CScene.h"
 #include "CGameObject.h"
+#include "CScene.h"
+
 CEventManager::CEventManager()
 {
 

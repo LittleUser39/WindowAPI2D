@@ -2,17 +2,13 @@
 #include "CGameObject.h"
 #include "CCollider.h"
 
-void CGameObject::SetDead()
-{
-	m_bAllive = false;
-}
 
 CGameObject::CGameObject()
 {
 	m_fptPos = {};
 	m_fptScale = {};
 	m_pCollider = nullptr;
-	m_bAllive = true;
+	m_bAlive = true;
 }
 
 CGameObject::~CGameObject()
@@ -23,10 +19,7 @@ CGameObject::~CGameObject()
 	}
 }
 
-void CGameObject::Update()
-{
-	
-}
+
 
 void CGameObject::finalUpdate()
 {
@@ -84,7 +77,12 @@ void CGameObject::CreateCollider()
 
 bool CGameObject::isDead()
 {
-	return !m_bAllive;
+	return !m_bAlive;
+}
+
+void CGameObject::SetDead()
+{
+	m_bAlive = false;
 }
 
 fPoint CGameObject::GetPos()

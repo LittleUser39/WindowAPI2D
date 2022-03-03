@@ -183,7 +183,7 @@ void CCollisionManager::UnCheckGroup(GROUP_GAMEOBJ objLeft, GROUP_GAMEOBJ objRig
 	UINT iCol;	//렬
 
 	//더 작은 수를 행으로 둠
-	if ((UINT)objLeft > (UINT)objRight)
+	if ((UINT)objLeft < (UINT)objRight)
 	{
 		iRow = (UINT)objLeft;
 		iCol = (UINT)objRight;

@@ -74,16 +74,15 @@ void CPlayer::Render(HDC hDc)
 
 void CPlayer::CreateMissile()
 {
-	fPoint fptMissilPos = GetPos();
-	fptMissilPos.x += GetScale().x / 2.f;
+	fPoint fpMissilePos = GetPos();
+	fpMissilePos.x += GetScale().x / 2.f;
 
+	// Misiile Object
 	CMissile* pMissile = new CMissile;
-	pMissile->SetPos(fptMissilPos);
-	pMissile->SetDir(fVec2(1,0));
+	pMissile->SetPos(fpMissilePos);
+	pMissile->SetDir(fVec2(1, 0));
 
-
-	CreateObj(pMissile, GROUP_GAMEOBJ::MISSILE);
-
+	CreateObj(pMissile, GROUP_GAMEOBJ::MISSILE_PLAYER);
 }
 
 void CPlayer::OnCollision(CCollider* pOther)
@@ -94,7 +93,7 @@ void CPlayer::OnCollisionEnter(CCollider* pOther)
 {
 	if (L"Monster" == pOther->GetGameObject()->GetName())
 	{
-		//몬스터랑 충돌
+		//몬스터와 충돌
 	}
 }
 

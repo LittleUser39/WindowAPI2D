@@ -80,7 +80,7 @@ void CCollider::finalUpdate()
 void CCollider::Render(HDC hDc)
 {
 	TYPE_PEN pen_Color;
-	if (m_iCollCount)
+	if (m_iCollCount > 0)
 		pen_Color = TYPE_PEN::RED;
 	else
 		pen_Color = TYPE_PEN::GREEN;
