@@ -36,6 +36,10 @@ void CScene_Start::Enter()
 	pMonster->SetCenterPos(pMonster->GetPos());
 	AddObject(pMonster, GROUP_GAMEOBJ::MONSTER);
 
+	CMonster* othermonster = pMonster->Clone();
+	othermonster->SetPos(fPoint(500, 350));
+	AddObject(othermonster, GROUP_GAMEOBJ::MONSTER);
+
 	CCollisionManager::getInst()->CheckGroup(GROUP_GAMEOBJ::PLAYER, GROUP_GAMEOBJ::MONSTER);
 	CCollisionManager::getInst()->CheckGroup(GROUP_GAMEOBJ::MISSILE_PLAYER, GROUP_GAMEOBJ::MONSTER);
 }

@@ -9,6 +9,8 @@ private:
 public:
 	CMissile();
 	~CMissile();
+	
+	virtual CMissile* Clone();
 
 	virtual void Update();
 	virtual void render(HDC hDc);

@@ -18,6 +18,11 @@ CMissile::~CMissile()
 
 }
 
+CMissile* CMissile::Clone()
+{
+	return new CMissile(*this);
+}
+
 void CMissile::Update()
 {
 	fPoint pos = GetPos();

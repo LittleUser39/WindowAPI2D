@@ -10,6 +10,7 @@ class CMonster : public CGameObject
 public:
 	CMonster();
 	virtual  ~CMonster();
+	virtual CMonster* Clone();
 
 	virtual void Update();		//몬스터의 행동 구성
 	void SetCenterPos(fPoint point);	//중간 좌표 설정

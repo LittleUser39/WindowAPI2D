@@ -72,6 +72,11 @@ void CPlayer::Render(HDC hDc)
 	component_render(hDc);
 }
 
+CPlayer* CPlayer::Clone()
+{
+	return new CPlayer(*this);
+}
+
 void CPlayer::CreateMissile()
 {
 	fPoint fpMissilePos = GetPos();

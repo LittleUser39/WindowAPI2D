@@ -5,10 +5,28 @@
 
 CGameObject::CGameObject()
 {
-	m_fptPos = {};
-	m_fptScale = {};
+	m_fptPos	= {};
+	m_fptScale	= {};
 	m_pCollider = nullptr;
-	m_bAlive = true;
+	m_bAlive	= true;
+}
+
+CGameObject::CGameObject(const CGameObject& other)
+{
+	m_strName	= other.m_strName;
+	m_fptPos	= other.m_fptPos;
+	m_fptScale	= other.m_fptScale;
+	m_bAlive	= true;
+
+	if (nullptr != other.m_pCollider)	//복사하는 애가 충돌체가 있으면 충돌체를 새로만들고 넣어줌
+	{
+		m_pCollider = new CCollider(*other.m_pCollider);
+		m_pCollider->m_pOwner = this;
+	}
+	else
+	{
+		m_pCollider = nullptr;
+	}
 }
 
 CGameObject::~CGameObject()

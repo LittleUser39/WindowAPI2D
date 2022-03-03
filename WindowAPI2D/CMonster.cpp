@@ -18,6 +18,13 @@ CMonster::~CMonster()
 {
 }
 
+CMonster* CMonster::Clone()
+{
+	return new CMonster(*this);
+}
+
+
+
 void CMonster::Update() //여기가 몬스터 행동에 관한것
 {
 	fPoint pos = GetPos();
