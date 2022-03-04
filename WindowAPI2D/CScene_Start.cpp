@@ -20,6 +20,11 @@ void CScene_Start::Update()
 	{
 		ChangeScn(GROUP_SCENE::TOOL);
 	}
+	if (KEYDOWN(VK_LBUTTON))
+	{
+		fPoint fptLookAt = CCameraManager::getInst()->GetRealPos(MousePos());
+		CCameraManager::getInst()->SetLookAt(fptLookAt);
+	}
 }
 
 void CScene_Start::Enter()
@@ -42,6 +47,9 @@ void CScene_Start::Enter()
 
 	CCollisionManager::getInst()->CheckGroup(GROUP_GAMEOBJ::PLAYER, GROUP_GAMEOBJ::MONSTER);
 	CCollisionManager::getInst()->CheckGroup(GROUP_GAMEOBJ::MISSILE_PLAYER, GROUP_GAMEOBJ::MONSTER);
+
+	//카메라 기본 시작시 화면 중간으로설정
+	CCameraManager::getInst()->SetLookAt(fPoint(WINSIZEX / 2.f, WINSIZEY / 2.f));
 }
 
 void CScene_Start::Exit()

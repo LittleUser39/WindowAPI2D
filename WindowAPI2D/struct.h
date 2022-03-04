@@ -51,32 +51,21 @@ struct fPoint	//좌표에 관한 값
 		assert(0 != num);
 		return fPoint(x / num, y / num);
 	}
-};
-
-struct fVec2	//방향성이 필요 - 방향성에 관한 값
-{
-	float x;
-	float y;
-
-	fVec2()
-	{
-		x = 0;
-		y = 0;
-	}
-
-	fVec2(float x, float y)
-	{
-		this->x = x;
-		this->y = y;
-	}
-
-	fVec2 Nomarlize()
+	fPoint Nomarlize()
 	{
 		float z = sqrt(x * x + y * y);
-		
+
 		x = x / z;
 		y = y / z;
 
 		return *this;
 	}
+
+	float Length()
+	{
+		return	sqrt(x * x + y * y);
+	}
 };
+typedef iPoint iVec2;
+typedef fPoint fVec2;
+

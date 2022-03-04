@@ -27,7 +27,8 @@ CPlayer::CPlayer()
 	pAni = GetAnimator()->FindAnimation(L"Right_Move");
 	pAni->GetFrame(1).fptOffset = fPoint(0.f, -10.f);
 	
-	CCameraManager::getInst()->SetTargetobj(this);
+	//이게 플레이어 기준으로 카메라를 세팅하는 것
+	//CCameraManager::getInst()->SetTargetobj(this);
 }
 
 CPlayer::~CPlayer()
