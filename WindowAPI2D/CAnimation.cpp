@@ -27,6 +27,16 @@ const wstring& CAnimation::GetName()
 	return m_strName;
 }
 
+void CAnimation::SetFrame(int frmIndex)
+{
+	m_iCurFrm = frmIndex;
+}
+
+tAniFrm& CAnimation::GetFrame(int frmIndex)
+{
+	return m_vecFrm[frmIndex];
+}
+
 void CAnimation::Update()
 {
 	//애니메이션 프레임 전환
@@ -34,9 +44,9 @@ void CAnimation::Update()
 
 	if (m_fAccTime > m_vecFrm[m_iCurFrm].fDuration)
 	{
-		m_iCurFrm++;
+		m_fAccTime -= m_vecFrm[m_iCurFrm].fDuration;//다음프레임 가기전 프레임의 시간
+		m_iCurFrm++;								//다음프레임
 		m_iCurFrm %= m_vecFrm.size();				//애니메이션을 다 돌고 처음으로 돌아감 - 전체를 나눔	
-		m_fAccTime -= m_vecFrm[m_iCurFrm].fDuration;
 	}
 }
 
@@ -45,6 +55,7 @@ void CAnimation::Render(HDC hDc)
 	CGameObject* pObj=m_pAnimator->GetObj();
 	fPoint fptPos = pObj->GetPos();
 	tAniFrm frm = m_vecFrm[m_iCurFrm];
+	fptPos = fptPos + frm.fptOffset; //오프셋 만큼 조금 움직인후 그려줌
 
 	TransparentBlt(hDc,
 		(int)(fptPos.x - frm.fptSlice.x / 2.f),

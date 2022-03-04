@@ -5,6 +5,8 @@
 #include "CTexture.h"
 #include "CCollider.h"
 #include "CAnimator.h"
+#include "CAnimation.h"
+
 CPlayer::CPlayer()
 {
 	SetName(L"Player");
@@ -17,9 +19,13 @@ CPlayer::CPlayer()
 	GetCollider()->SetScale(fPoint(40.f, 40.f));
 	GetCollider()->SetOffsetPos(fPoint(0.f, 10.f));
 
-	CreateAnimator();
+	CreateAnimator();																							//여기가 속도,이건 애니메 갯수
 	GetAnimator()->CreateAnimation(L"Right_Move", m_pTex, fPoint(0.f, 210.f), fPoint(70.f, 70.f), fPoint(70.f, 0.f), 0.5f, 3);
-	GetAnimator()->Play(L"Right_Move");
+	GetAnimator()->Play(L"Right_Move");	//이게 실행하는거 이름넣으면 그거 실행됨
+
+	CAnimation* pAni;
+	pAni = GetAnimator()->FindAnimation(L"Right_Move");
+	pAni->GetFrame(1).fptOffset = fPoint(0.f, -10.f);
 }
 
 CPlayer::~CPlayer()

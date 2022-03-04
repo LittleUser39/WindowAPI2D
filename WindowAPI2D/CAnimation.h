@@ -5,9 +5,10 @@ class CTexture;
 
 struct tAniFrm
 {
-	fPoint fptLT;				//왼쪽 위부터
-	fPoint fptSlice;			//얼마나 잘려져있나
-	float fDuration;			//몇초동안 보여지나
+	fPoint fptLT;				// 왼쪽 위부터
+	fPoint fptSlice;			// 얼마나 잘려져있나
+	fPoint fptOffset;			// 애니메이션이 어디서 시작할껀지
+	float  fDuration;			// 몇초동안 보여지나
 };
 
 class CAnimation
@@ -29,6 +30,9 @@ public:
 	void SetName(const wstring& strName);	//이름 설정
 	const wstring& GetName();				//이름 가져오기 string은 원본을 가져옴 const로
 	
+	void SetFrame(int frmIndex);
+	tAniFrm& GetFrame(int frmIndex);
+
 	void Update();							//지금 장면을 몇초동안 그려야하나
 	void Render(HDC hDc);
 	void Create(CTexture* pTex, fPoint lt, fPoint slice, fPoint step, float duration, UINT frmcount); //애니메이션 생성
