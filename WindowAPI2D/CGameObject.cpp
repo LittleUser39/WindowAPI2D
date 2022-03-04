@@ -56,11 +56,13 @@ void CGameObject::finalUpdate()
 
 void CGameObject::Render(HDC hDc)
 {
+	fPoint fptRenderPos = CCameraManager::getInst()->GetRenderPos(m_fptPos);
+	
 	Rectangle(hDc,
-		(int)(GetPos().x - GetScale().x / 2),
-		(int)(GetPos().y - GetScale().y / 2),
-		(int)(GetPos().x + GetScale().x / 2),
-		(int)(GetPos().y + GetScale().y / 2));
+		(int)(fptRenderPos.x - GetScale().x / 2),
+		(int)(fptRenderPos.y - GetScale().y / 2),
+		(int)(fptRenderPos.x + GetScale().x / 2),
+		(int)(fptRenderPos.y + GetScale().y / 2));
 	
 	component_render(hDc);
 }

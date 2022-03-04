@@ -56,10 +56,13 @@ void CAnimation::Render(HDC hDc)
 	fPoint fptPos = pObj->GetPos();
 	tAniFrm frm = m_vecFrm[m_iCurFrm];
 	fptPos = fptPos + frm.fptOffset; //오프셋 만큼 조금 움직인후 그려줌
-
+	
+	//카메라를 기준으로 그려져야하는 위치
+	fPoint fptRenderPos = CCameraManager::getInst()->GetRenderPos(fptPos);
+	
 	TransparentBlt(hDc,
-		(int)(fptPos.x - frm.fptSlice.x / 2.f),
-		(int)(fptPos.y - frm.fptSlice.y / 2.f),
+		(int)(fptRenderPos.x - frm.fptSlice.x / 2.f),
+		(int)(fptRenderPos.y - frm.fptSlice.y / 2.f),
 		(int)(frm.fptSlice.x),
 		(int)(frm.fptSlice.y),
 		m_pTex->GetDC(),

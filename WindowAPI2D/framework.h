@@ -86,7 +86,7 @@ enum  class TYPE_BRUSH
 #include "CResourceManager.h"
 #include "CCollisionManager.h"
 #include "CEventManager.h"
-
+#include "CCameraManager.h"
 
 //========================================
 //## 디파인 매크로						##
@@ -104,6 +104,7 @@ enum  class TYPE_BRUSH
 #define KEY(key)		CKeyManager::getInst()->GetButton(key)		//버튼이 눌림
 #define KEYUP(key)		CKeyManager::getInst()->GetButtonUp(key)	//업키
 #define KEYDOWN(key)	CKeyManager::getInst()->GetButtonDown(key)	//다운키
+#define MousePos()		CKeyManager::getInst()->GetMousePos()		//마우스 포지션
 
 #define CreateObj(obj, group)	CEventManager::getInst()->EventCreateObject(obj, group)
 #define DeleteObj(obj)			CEventManager::getInst()->EventDeleteObject(obj)

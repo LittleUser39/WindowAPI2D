@@ -34,6 +34,7 @@ void CCore::update()
 	CKeyManager::getInst()->Update(); //여기서 키를 받아서 정확히 누른 시간에 키를 받아 움직임
 	CSceneManager::getInst()->Update();
 	CCollisionManager::getInst()->Update();
+	CCameraManager::getInst()->Update();
 	
 }
 

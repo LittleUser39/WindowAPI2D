@@ -26,6 +26,8 @@ CPlayer::CPlayer()
 	CAnimation* pAni;
 	pAni = GetAnimator()->FindAnimation(L"Right_Move");
 	pAni->GetFrame(1).fptOffset = fPoint(0.f, -10.f);
+	
+	CCameraManager::getInst()->SetTargetobj(this);
 }
 
 CPlayer::~CPlayer()

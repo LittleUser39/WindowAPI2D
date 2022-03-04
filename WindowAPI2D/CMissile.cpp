@@ -43,12 +43,13 @@ void CMissile::render(HDC hDc)
 	fPoint pos = GetPos();
 	fPoint scale = GetScale();
 
+	fPoint fptRenderPos = CCameraManager::getInst()->GetRenderPos(pos);
 
 	Ellipse(hDc,
-		(int)(pos.x - scale.x / 2.f),
-		(int)(pos.y - scale.y / 2.f),
-		(int)(pos.x + scale.x / 2.f),
-		(int)(pos.y + scale.y / 2.f));
+		(int)(fptRenderPos.x - scale.x / 2.f),
+		(int)(fptRenderPos.y - scale.y / 2.f),
+		(int)(fptRenderPos.x + scale.x / 2.f),
+		(int)(fptRenderPos.y + scale.y / 2.f));
 
 	component_render(hDc);
 }

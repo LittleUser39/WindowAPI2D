@@ -88,12 +88,13 @@ void CCollider::Render(HDC hDc)
 	SelectGDI brush(hDc, TYPE_BRUSH::HOLLOW);
 	SelectGDI pen(hDc, pen_Color);
 
+	fPoint fptRenderPos = CCameraManager::getInst()->GetRenderPos(m_fptFinalPos);
 
 	Rectangle(hDc,
-		(int)(m_fptFinalPos.x - m_fptScale.x / 2.f),
-		(int)(m_fptFinalPos.y - m_fptScale.y / 2.f),
-		(int)(m_fptFinalPos.x + m_fptScale.x / 2.f),
-		(int)(m_fptFinalPos.y + m_fptScale.y / 2.f));
+		(int)(fptRenderPos.x - m_fptScale.x / 2.f),
+		(int)(fptRenderPos.y - m_fptScale.y / 2.f),
+		(int)(fptRenderPos.x + m_fptScale.x / 2.f),
+		(int)(fptRenderPos.y + m_fptScale.y / 2.f));
 }
 
 void CCollider::OnCollision(CCollider* pOther)		//Ãæµ¹Áß
