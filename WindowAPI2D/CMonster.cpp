@@ -7,21 +7,28 @@
 
 CMonster::CMonster()
 {
-	SetName(L"Gumba");
-	m_pTex = CResourceManager::getInst()->LoadTexture(L"MonsterTex", L"\\texture\\Goom.bmp");
+	SetName(L"Goomba");
+	m_pTex = CResourceManager::getInst()->LoadTexture(L"MonsterTex", L"\\texture\\Animation\\Goomba.bmp");
 
-	SetScale(fPoint(70, 70));
-	m_fVelocity = 300;
-	m_fDistance = 200;
+	SetScale(fPoint(30, 30));
+	m_fVelocity = 50;
+	m_fDistance = 100;
 	m_bIsUpDir	= true;
 	
 
 	CreateCollider();
-	GetCollider()->SetScale(fPoint(50, 50));
+	GetCollider()->SetScale(fPoint(20, 20));
+	
+	CreateAnimator();						//이름 속성 시작위치 자를위치 속도,이건 애니메 갯수
+	//GetAnimator()->CreateAnimation(L"Idle", m_pTex, fPoint(0.f, 0.f), fPoint(60.f, 60.f), fPoint(60.f, 0.f), 0.25f, 1);
+	GetAnimator()->CreateAnimation(L"Left_Move", m_pTex, fPoint(0.f, 0.f), fPoint(60.f, 60.f), fPoint(60.f, 0.f), 0.25f, 2);
+	GetAnimator()->CreateAnimation(L"Right_Move", m_pTex, fPoint(240.f, 0.f), fPoint(60.f, 60.f), fPoint(60.f, 0.f), 0.25f, 2);
+	GetAnimator()->Play(L"Left_Move");
 }
 
 CMonster::~CMonster()
 {
+	
 }
 
 CMonster* CMonster::Clone()
@@ -34,19 +41,20 @@ CMonster* CMonster::Clone()
 void CMonster::Update() //여기가 몬스터 행동에 관한것
 {
 	fPoint pos = GetPos();
-	//if (m_bIsUpDir)
-	//{
-	//	pos.y -= m_fVelocity * DT;
-	//	if (pos.y < m_fptCenterPos.y - m_fDistance)	//내가 원하는 곳에서 더 위로감 - 방향을 바꿔줌
-	//		m_bIsUpDir = false;
-	//}
-	//else
-	//{
-	//	pos.y += m_fVelocity * DT;
-	//	if (pos.y > m_fptCenterPos.y + m_fDistance)	//내가 원하는 곳에서 더 아래로감 - 방향을 바꿔줌
-	//		m_bIsUpDir = true;
-	//
-	//}
+	if (m_bIsUpDir)
+	{
+		pos.x -= m_fVelocity * DT;
+		if (pos.x < m_fptCenterPos.x - m_fDistance)	
+			m_bIsUpDir = false;
+		//GetAnimator()->Play(L"Left_Move");
+	}
+	else
+	{
+		pos.x += m_fVelocity * DT;
+		if (pos.x > m_fptCenterPos.x + m_fDistance)	
+			m_bIsUpDir = true;
+		//GetAnimator()->Play(L"Right_Move");
+	}
 
 	SetPos(pos);
 }
@@ -61,13 +69,13 @@ void CMonster::Render(HDC hDc)
 	int width = m_pTex->GetBmpWidth();
 	int height = m_pTex->GetBmpHeight();
 
-	TransparentBlt(hDc,
+	/*TransparentBlt(hDc,
 		(int)(GetPos().x - (float)(width / 2)),
 		(int)(GetPos().y - (float)(height / 2)),
 		width, height,
 		m_pTex->GetDC(),
 		0, 0, width, height,
-		RGB(255, 0, 255));
+		RGB(255, 0, 255));*/
 	
 	component_render(hDc);
 }

@@ -13,9 +13,12 @@ CPlayer::CPlayer()
 	m_pTex = CResourceManager::getInst()->LoadTexture(L"PlayerTex",L"\\texture\\Animation\\MarioPlayer.bmp"); //로드된것은 playerTex로 이름이 정해짐(값도 정해짐), 경로를 설정하고 파일(텍스쳐)골라줌 
 	
 	m_dVelocity = 50;
-	m_gravite = 50;
+	m_gravite = 0;
 	SetScale(fPoint(60.f, 60.f));
 	m_directspeed=(fPoint(0,0));
+	Isfly = false;
+	m_UpSpeed = 400;
+
 	//충돌체
 	CreateCollider();
 	GetCollider()->SetScale(fPoint(30.f, 30.f));
@@ -49,6 +52,7 @@ void CPlayer::Update()
 	
 	
 	GetAnimator()->Play(L"Idle_Right");
+
 	if (KEY(VK_LEFT))
 	{
 		pos.x -= m_dVelocity * DT;
@@ -63,9 +67,15 @@ void CPlayer::Update()
 	//점프 구현 나중에 찾아봐야함
 	if (KEY(VK_UP))
 	{
-	
+		pos.y -= m_UpSpeed * DT;
+		
 	}
-	
+	else if(KEYDOWN(VK_UP))
+	{
+		m_gravite += 200 * DT;
+		pos.y += m_gravite * DT;
+
+	}
 	if (KEY(VK_DOWN))
 	{
 		

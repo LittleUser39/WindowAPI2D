@@ -7,6 +7,8 @@ class CPlayer : public CGameObject
 	CTexture* m_pTex;
 	float m_gravite;
 	fPoint m_directspeed;
+	float m_UpSpeed;
+	bool Isfly;
 
 public:
 	CPlayer();
