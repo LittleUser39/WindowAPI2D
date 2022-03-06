@@ -10,22 +10,29 @@
 CPlayer::CPlayer()
 {
 	SetName(L"Player");
-	m_pTex = CResourceManager::getInst()->LoadTexture(L"PlayerTex",L"\\texture\\Animation\\Animation_Player.bmp"); //로드된것은 playerTex로 이름이 정해짐(값도 정해짐), 경로를 설정하고 파일(텍스쳐)골라줌 
+	m_pTex = CResourceManager::getInst()->LoadTexture(L"PlayerTex",L"\\texture\\Animation\\MarioPlayer.bmp"); //로드된것은 playerTex로 이름이 정해짐(값도 정해짐), 경로를 설정하고 파일(텍스쳐)골라줌 
 	
-	m_dVelocity = 100;
-	SetScale(fPoint(70.f, 70.f));
-
+	m_dVelocity = 50;
+	m_gravite = 50;
+	SetScale(fPoint(60.f, 60.f));
+	m_directspeed=(fPoint(0,0));
+	//충돌체
 	CreateCollider();
-	GetCollider()->SetScale(fPoint(40.f, 40.f));
-	GetCollider()->SetOffsetPos(fPoint(0.f, 10.f));
+	GetCollider()->SetScale(fPoint(30.f, 30.f));
+	GetCollider()->SetOffsetPos(fPoint(0.f, 0.f));
+	
+	//애니메이션
+	CreateAnimator();						//이름 속성 시작위치 자를위치 속도,이건 애니메 갯수
+	GetAnimator()->CreateAnimation(L"Left_Move", m_pTex, fPoint(180.f, 0.f), fPoint(60.f, 60.f), fPoint(60.f, 0.f), 0.25f, 3);
+	GetAnimator()->CreateAnimation(L"Right_Move", m_pTex, fPoint(0.f, 60.f), fPoint(60.f, 60.f), fPoint(60.f, 0.f), 0.25f, 3);
+	GetAnimator()->CreateAnimation(L"Idle_left", m_pTex, fPoint(0.f, 0.f), fPoint(60.f, 60.f), fPoint(60.f, 0.f), 0.5f, 1);
+	GetAnimator()->CreateAnimation(L"Idle_Right", m_pTex, fPoint(360.f, 60.f), fPoint(60.f, 60.f), fPoint(60.f, 0.f), 0.5f, 1);
+	//GetAnimator()->Play(L"Idle_left");
 
-	CreateAnimator();																							//여기가 속도,이건 애니메 갯수
-	GetAnimator()->CreateAnimation(L"Right_Move", m_pTex, fPoint(0.f, 210.f), fPoint(70.f, 70.f), fPoint(70.f, 0.f), 0.5f, 3);
-	GetAnimator()->Play(L"Right_Move");	//이게 실행하는거 이름넣으면 그거 실행됨
-
-	CAnimation* pAni;
+	//이게 점프뛰는거 애니메이션 조종
+	/*CAnimation* pAni;
 	pAni = GetAnimator()->FindAnimation(L"Right_Move");
-	pAni->GetFrame(1).fptOffset = fPoint(0.f, -10.f);
+	pAni->GetFrame(1).fptOffset = fPoint(0.f, -10.f);*/
 	
 	//이게 플레이어 기준으로 카메라를 세팅하는 것
 	//CCameraManager::getInst()->SetTargetobj(this);
@@ -40,23 +47,28 @@ void CPlayer::Update()
 {
 	fPoint pos = GetPos();
 	
-
-
+	
+	GetAnimator()->Play(L"Idle_Right");
 	if (KEY(VK_LEFT))
 	{
 		pos.x -= m_dVelocity * DT;
+		GetAnimator()->Play(L"Left_Move");	//이게 실행하는거 이름넣으면 그거 실행됨
 	}
 	if (KEY(VK_RIGHT))
 	{
 		pos.x += m_dVelocity * DT;
+		GetAnimator()->Play(L"Right_Move");
 	}
+
+	//점프 구현 나중에 찾아봐야함
 	if (KEY(VK_UP))
 	{
-		pos.y -= m_dVelocity * DT;
+	
 	}
+	
 	if (KEY(VK_DOWN))
 	{
-		pos.y += m_dVelocity * DT;
+		
 	}
 
 	SetPos(pos);

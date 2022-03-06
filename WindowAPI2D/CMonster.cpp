@@ -1,17 +1,23 @@
 #include "framework.h"
 #include "CMonster.h"
+#include "CTexture.h"
 #include "CCollider.h"
+#include "CAnimation.h"
+#include "CAnimator.h"
 
 CMonster::CMonster()
 {
-	SetName(L"Monster");
-	SetScale(fPoint(100, 100));
+	SetName(L"Gumba");
+	m_pTex = CResourceManager::getInst()->LoadTexture(L"MonsterTex", L"\\texture\\Goom.bmp");
+
+	SetScale(fPoint(70, 70));
 	m_fVelocity = 300;
 	m_fDistance = 200;
 	m_bIsUpDir	= true;
+	
 
 	CreateCollider();
-	GetCollider()->SetScale(fPoint(100, 100));
+	GetCollider()->SetScale(fPoint(50, 50));
 }
 
 CMonster::~CMonster()
@@ -48,6 +54,22 @@ void CMonster::Update() //여기가 몬스터 행동에 관한것
 void CMonster::SetCenterPos(fPoint point)
 {
 	m_fptCenterPos = point;
+}
+
+void CMonster::Render(HDC hDc)
+{
+	int width = m_pTex->GetBmpWidth();
+	int height = m_pTex->GetBmpHeight();
+
+	TransparentBlt(hDc,
+		(int)(GetPos().x - (float)(width / 2)),
+		(int)(GetPos().y - (float)(height / 2)),
+		width, height,
+		m_pTex->GetDC(),
+		0, 0, width, height,
+		RGB(255, 0, 255));
+	
+	component_render(hDc);
 }
 
 fPoint CMonster::GetCenterPos()
