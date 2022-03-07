@@ -3,8 +3,11 @@
 #include "CGameObject.h"
 #include "CPlayer.h"
 #include "CMonster.h"
+#include"CBackGround.h"
+#include "Mario.h"
 CScene_Start::CScene_Start()
 {
+
 }
 
 CScene_Start::~CScene_Start()
@@ -29,11 +32,14 @@ void CScene_Start::Update()
 
 void CScene_Start::Enter()
 {
-
+	//배경추가
+	
+	
+	
 	//player 추가
-	CPlayer* pPlayer = new CPlayer;
-	pPlayer->SetPos(fPoint(100, 650));
-	AddObject(pPlayer, GROUP_GAMEOBJ::PLAYER);
+	Mario* pMario = new Mario;
+	pMario->SetPos(fPoint(100, 650));
+	AddObject(pMario, GROUP_GAMEOBJ::PLAYER);
 
 	//monster 추가
 	CMonster* pMonster = new CMonster;

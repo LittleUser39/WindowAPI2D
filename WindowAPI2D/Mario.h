@@ -1,22 +1,22 @@
 #pragma once
 #include "CGameObject.h"
 class CTexture;
-class CPlayer : public CGameObject
+class Mario : public CGameObject
 {
 	float m_dVelocity;	//그냥 속도
 	float m_UpSpeed;	//점프 속도
 	float m_gravite;	//중력
 
 	CTexture* m_pTex;	//이미지 파일
-	
+
 	bool Isfly;			//캐릭터가 하늘에 있는지
 	bool IsRight;		//방향전환
 
 public:
-	CPlayer();
-	virtual ~CPlayer();
+	Mario();
+	virtual ~Mario();
 
-	virtual CPlayer* Clone();
+	virtual Mario* Clone();
 
 	virtual void Update();
 	virtual void Render(HDC hDc);

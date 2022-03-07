@@ -28,7 +28,7 @@ CMonster::CMonster()
 
 CMonster::~CMonster()
 {
-	
+
 }
 
 CMonster* CMonster::Clone()
