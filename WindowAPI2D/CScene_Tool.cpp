@@ -25,6 +25,23 @@ void CScene_Tool::Update()
 	{
 		ChangeScn(GROUP_SCENE::START);
 	}
+	if (KEY('A'))
+	{
+		CCameraManager::getInst()->Scroll(fVec2(-1, 0), m_fVelocity);
+	}
+	if (KEY('D'))
+	{
+		CCameraManager::getInst()->Scroll(fVec2(1, 0), m_fVelocity);
+	}
+	if (KEY('W'))
+	{
+		CCameraManager::getInst()->Scroll(fVec2(0, -1), m_fVelocity);
+	}
+	if (KEY('S'))
+	{
+		CCameraManager::getInst()->Scroll(fVec2(0, 1), m_fVelocity);
+	}
+
 	SetTileIdx();
 }
 

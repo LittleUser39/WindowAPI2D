@@ -24,13 +24,13 @@ public:
 
 	void Update();
 
-	void SetLookAt(fPoint lookat);	//보고 있는 위치 설정
-	void SetTargetobj(CGameObject* target);
+	void SetLookAt(fPoint lookat);			//보고 있는 위치 설정
+	void SetTargetobj(CGameObject* target);	// 타겟기준으로 보기
+	void Scroll(fVec2 vec, float velocity);	//일정한속도로 보기 (움직이기)
 
 	fPoint GetLookAt();
 	fPoint GetRenderPos(fPoint objpos);	//카메라가 보고있는 대로 오브젝트가 그려져야함
 	fPoint GetRealPos(fPoint renderpos);	//그려주는 곳 실제 좌표 반환
 
-	
 };
 

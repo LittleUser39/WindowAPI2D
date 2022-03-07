@@ -137,7 +137,7 @@ void CScene::LoadTile(const wstring& strPath)
 	
 	FILE* pFile = nullptr;
 
-	_wfopen_s(&pFile, strPath.c_str(), L"rb");
+	_wfopen_s(&pFile, strPath.c_str(), L"rb");      // w : write, b : binary
 	assert(pFile);
 
 	UINT xCount = 0;
@@ -145,10 +145,10 @@ void CScene::LoadTile(const wstring& strPath)
 
 	fread(&xCount, sizeof(UINT), 1, pFile);
 	fread(&yCount, sizeof(UINT), 1, pFile);
-	
+
 	CreateTile(xCount, yCount);
 
-	const vector<CGameObject*> vecTile = GetGroupObject(GROUP_GAMEOBJ::TILE);
+	const vector<CGameObject*>& vecTile = GetGroupObject(GROUP_GAMEOBJ::TILE);
 
 	for (UINT i = 0; i < vecTile.size(); i++)
 	{

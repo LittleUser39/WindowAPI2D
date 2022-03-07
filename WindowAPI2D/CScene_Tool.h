@@ -5,6 +5,8 @@ class CScene_Tool : public CScene
 private:
     HWND m_hWnd;
     UINT m_Idx;
+    float m_fVelocity = 500;
+
 public:
     CScene_Tool();
     ~CScene_Tool();
