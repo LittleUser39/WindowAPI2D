@@ -1,10 +1,13 @@
 #include "framework.h"
 #include "CScene.h"
 #include "CGameObject.h"
-
+#include "CTile.h"
 CScene::CScene()
 {
 	m_strName = L"";
+	m_iTileX = 0;
+	m_iTileY = 0;
+
 }
 
 CScene::~CScene()
@@ -76,6 +79,16 @@ wstring CScene::GetName()
 	return m_strName;
 }
 
+UINT CScene::GetTileX()
+{
+	return m_iTileX;
+}
+
+UINT CScene::GetTileY()
+{
+	return m_iTileY;
+}
+
 void CScene::AddObject(CGameObject* pObj, GROUP_GAMEOBJ type)
 {
 	m_arrObj[(int)type].push_back(pObj);
@@ -96,5 +109,52 @@ void CScene::DeleteAll()
 	{
 		DeleteGroup((GROUP_GAMEOBJ)i);
 	}
+}
+
+void CScene::CreateTile(UINT xsize, UINT ysize)
+{
+	DeleteGroup(GROUP_GAMEOBJ::TILE);
+
+	m_iTileX = xsize;
+	m_iTileY = ysize;
+	
+	CTexture* pTileTex = CResourceManager::getInst()->LoadTexture(L"Tile", L"\\texture\\Tile\\tilemap.bmp");
+	//Tile»ý¼º
+	for (int i = 0; i < ysize; i++)
+	{
+		for (int j = 0; j < xsize; j++)
+		{
+			CTile* pTile = new CTile();
+			pTile->SetPos(fPoint((float)(j * CTile::SIZE_TILE), (float)(i * CTile::SIZE_TILE)));
+			pTile->SetTexture(pTileTex);
+			AddObject(pTile, GROUP_GAMEOBJ::TILE);
+		}
+	}
+}
+
+void CScene::LoadTile(const wstring& strPath)
+{
+	wstring strFillPath = CPathManager::getInst()->GetContentPath();
+	strFillPath += strPath;
+
+	FILE* pFile = nullptr;
+
+	_wfopen_s(&pFile, strFillPath.c_str(), L"rb");
+	assert(pFile);
+
+	UINT xCount = 0;
+	UINT yCount = 0;
+
+	fread(&xCount, sizeof(UINT), 1, pFile);
+	fread(&yCount, sizeof(UINT), 1, pFile);
+	
+	const vector<CGameObject*> vecTile = GetGroupObject(GROUP_GAMEOBJ::TILE);
+
+	for (UINT i = 0; i < vecTile.size(); i++)
+	{
+		((CTile*)vecTile[i])->Load(pFile);
+	}
+
+	fclose(pFile);
 }
 

@@ -12,7 +12,9 @@ private:
 	vector<CGameObject*> m_arrObj[(int)GROUP_GAMEOBJ::SIZE];
 	wstring m_strName;
 	
-	
+	UINT m_iTileX;
+	UINT m_iTileY;
+
 public:
 	CScene();
 	virtual ~CScene();
@@ -29,10 +31,16 @@ public:
 
 	void SetName(const wstring& strName);	//이름 설정
 	wstring GetName();						//이름 가져오기
+	
+	UINT GetTileX();
+	UINT GetTileY();
 
 	void AddObject(CGameObject* pObj, GROUP_GAMEOBJ type); // 씬에 오브젝트 추가 (오브젝트,오브젝트가 어떤 그룹에 속하는가)
-protected:
+
 	void DeleteGroup(GROUP_GAMEOBJ group);		//해당 그룹만 지워줌
 	void DeleteAll();							//그 장면에 있던 오브젝트들 삭제
+	
+	void CreateTile(UINT xsize, UINT ysize);
+	void LoadTile(const wstring& strPath);
 };
 

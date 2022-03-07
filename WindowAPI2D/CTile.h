@@ -4,6 +4,7 @@
 
 class CTile : public CGameObject
 {
+
 private:
 	CTexture* m_pTex;
 	int m_iIdx;
@@ -20,5 +21,8 @@ public:
 
 	void SetTexture(CTexture* pTex);
 	void SetTileIdx(int idx);
+
+	virtual void Save(FILE* pFile);
+	virtual void Load(FILE* pFile);
 };
 

@@ -29,6 +29,7 @@ void CScene_Start::Update()
 
 void CScene_Start::Enter()
 {
+	LoadTile(L"\\Tile\\test.tile");
 
 	//player Ãß°¡
 	CPlayer* pPlayer = new CPlayer;
@@ -56,4 +57,5 @@ void CScene_Start::Exit()
 {
 	DeleteAll();
 	
+	CCollisionManager::getInst()->Reset();
 }
