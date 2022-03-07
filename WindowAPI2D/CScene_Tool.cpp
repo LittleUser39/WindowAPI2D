@@ -120,6 +120,30 @@ void CScene_Tool::SaveTileDate()
 	}
 }
 
+void CScene_Tool::LoadTileDate()
+{
+	OPENFILENAME ofn = {};
+
+	ofn.lStructSize = sizeof(OPENFILENAME);  // 구조체 사이즈.
+	ofn.hwndOwner = hWnd; // 부모 윈도우 지정.
+	wchar_t szName[256] = {};
+	ofn.lpstrFile = szName; // 나중에 완성된 경로가 채워질 버퍼 지정.
+	ofn.nMaxFile = sizeof(szName); // lpstrFile에 지정된 버퍼의 문자 수.
+	ofn.lpstrFilter = L"ALL\0*.*\0tile\0*.tile"; // 필터 설정
+	ofn.nFilterIndex = 0; // 기본 필터 세팅. 0는 all로 초기 세팅됨. 처음꺼.
+	ofn.lpstrFileTitle = nullptr; // 타이틀 바
+	ofn.nMaxFileTitle = 0; // 타이틀 바 문자열 크기. nullptr이면 0.
+	wstring strTileFolder = CPathManager::getInst()->GetContentPath();
+	strTileFolder += L"tile";
+	ofn.lpstrInitialDir = strTileFolder.c_str(); // 초기경로. 우리는 타일 저장할거기 때문에, content->tile 경로로 해두자.
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST; // 스타일
+
+	if (GetOpenFileName(&ofn))
+	{
+		LoadTile(szName);
+	}
+}
+
 
 
 // 타일 다이얼로그 박스의 메세지 처리기입니다.
@@ -152,7 +176,7 @@ INT_PTR CALLBACK TileWinProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 			CScene_Tool* pToolScene = dynamic_cast<CScene_Tool*>(pCurScen); //<>안에 있는 것이 변환이 가능하다 변환, 불가능 그냥 nullptr을 주는 함수
 			assert(pToolScene);
 
-			pToolScene->LoadTile(L"\\Tile\\test.tile");
+			pToolScene->LoadTileDate();
 
 			return (INT_PTR)TRUE;
 		}

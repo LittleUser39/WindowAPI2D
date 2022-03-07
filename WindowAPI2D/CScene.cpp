@@ -134,12 +134,10 @@ void CScene::CreateTile(UINT xsize, UINT ysize)
 
 void CScene::LoadTile(const wstring& strPath)
 {
-	wstring strFillPath = CPathManager::getInst()->GetContentPath();
-	strFillPath += strPath;
-
+	
 	FILE* pFile = nullptr;
 
-	_wfopen_s(&pFile, strFillPath.c_str(), L"rb");
+	_wfopen_s(&pFile, strPath.c_str(), L"rb");
 	assert(pFile);
 
 	UINT xCount = 0;

@@ -29,7 +29,10 @@ void CScene_Start::Update()
 
 void CScene_Start::Enter()
 {
-	LoadTile(L"\\Tile\\test.tile");
+	//맵 불러오기
+	wstring path = CPathManager::getInst()->GetContentPath();
+	path += L"tile\\test.tile"; //여기서 이름 바꿔줘야함 타일바꿀려면
+	LoadTile(path);
 
 	//player 추가
 	CPlayer* pPlayer = new CPlayer;
