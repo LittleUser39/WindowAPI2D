@@ -9,6 +9,7 @@ class CPlayer : public CGameObject
 	fPoint m_directspeed;
 	float m_UpSpeed;
 	bool Isfly;
+	bool IsRight;	//방향전환
 
 public:
 	CPlayer();

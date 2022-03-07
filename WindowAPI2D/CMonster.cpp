@@ -23,7 +23,7 @@ CMonster::CMonster()
 	//GetAnimator()->CreateAnimation(L"Idle", m_pTex, fPoint(0.f, 0.f), fPoint(60.f, 60.f), fPoint(60.f, 0.f), 0.25f, 1);
 	GetAnimator()->CreateAnimation(L"Left_Move", m_pTex, fPoint(0.f, 0.f), fPoint(60.f, 60.f), fPoint(60.f, 0.f), 0.25f, 2);
 	GetAnimator()->CreateAnimation(L"Right_Move", m_pTex, fPoint(240.f, 0.f), fPoint(60.f, 60.f), fPoint(60.f, 0.f), 0.25f, 2);
-	GetAnimator()->Play(L"Left_Move");
+	//GetAnimator()->Play(L"Left_Move");
 }
 
 CMonster::~CMonster()
@@ -46,17 +46,19 @@ void CMonster::Update() //여기가 몬스터 행동에 관한것
 		pos.x -= m_fVelocity * DT;
 		if (pos.x < m_fptCenterPos.x - m_fDistance)	
 			m_bIsUpDir = false;
-		//GetAnimator()->Play(L"Left_Move");
+		GetAnimator()->Play(L"Left_Move");
 	}
 	else
 	{
 		pos.x += m_fVelocity * DT;
 		if (pos.x > m_fptCenterPos.x + m_fDistance)	
 			m_bIsUpDir = true;
-		//GetAnimator()->Play(L"Right_Move");
+		GetAnimator()->Play(L"Right_Move");
 	}
 
 	SetPos(pos);
+
+	GetAnimator()->Update();
 }
 
 void CMonster::SetCenterPos(fPoint point)

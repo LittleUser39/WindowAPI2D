@@ -41,9 +41,10 @@ void CScene_Start::Enter()
 	pMonster->SetCenterPos(pMonster->GetPos());
 	AddObject(pMonster, GROUP_GAMEOBJ::MONSTER);
 
-	CMonster* othermonster = pMonster->Clone();
+	//클론 때문에 오류가 났음 일단 주석처리
+	/*CMonster* othermonster = pMonster->Clone();
 	othermonster->SetPos(fPoint(400, 650));
-	AddObject(othermonster, GROUP_GAMEOBJ::MONSTER);
+	AddObject(othermonster, GROUP_GAMEOBJ::MONSTER);*/
 
 	CCollisionManager::getInst()->CheckGroup(GROUP_GAMEOBJ::PLAYER, GROUP_GAMEOBJ::MONSTER);
 	CCollisionManager::getInst()->CheckGroup(GROUP_GAMEOBJ::MISSILE_PLAYER, GROUP_GAMEOBJ::MONSTER);

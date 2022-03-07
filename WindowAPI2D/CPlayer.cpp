@@ -18,6 +18,7 @@ CPlayer::CPlayer()
 	m_directspeed=(fPoint(0,0));
 	Isfly = false;
 	m_UpSpeed = 400;
+	IsRight = true;	
 
 	//충돌체
 	CreateCollider();
@@ -50,18 +51,24 @@ void CPlayer::Update()
 {
 	fPoint pos = GetPos();
 	
+	//애니메 방향전환
+	if (IsRight)
+		GetAnimator()->Play(L"Idle_Right");
+	else
+		GetAnimator()->Play(L"Idle_left");
 	
-	GetAnimator()->Play(L"Idle_Right");
-
+	//좌우로 움직이기
 	if (KEY(VK_LEFT))
 	{
 		pos.x -= m_dVelocity * DT;
 		GetAnimator()->Play(L"Left_Move");	//이게 실행하는거 이름넣으면 그거 실행됨
+		IsRight = false;
 	}
 	if (KEY(VK_RIGHT))
 	{
 		pos.x += m_dVelocity * DT;
 		GetAnimator()->Play(L"Right_Move");
+		IsRight = true;
 	}
 
 	//점프 구현 나중에 찾아봐야함
