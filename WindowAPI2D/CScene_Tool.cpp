@@ -75,13 +75,10 @@ void CScene_Tool::SetTileIdx()
 
 void CScene_Tool::SaveTile(const wstring& strPath)
 {
-	wstring strFillPath = CPathManager::getInst()->GetContentPath();
-	strFillPath += strPath;
-
 	FILE* pFile = nullptr;
 
-	_wfopen_s(&pFile, strFillPath.c_str(), L"wb");
-		assert(pFile);
+	_wfopen_s(&pFile, strPath.c_str(), L"wb");		// w : write, b : binary
+	assert(pFile);
 
 	UINT xCount = GetTileX();
 	UINT yCount = GetTileY();
@@ -89,7 +86,7 @@ void CScene_Tool::SaveTile(const wstring& strPath)
 	fwrite(&xCount, sizeof(UINT), 1, pFile);
 	fwrite(&yCount, sizeof(UINT), 1, pFile);
 
-	const vector<CGameObject*> vecTile = GetGroupObject(GROUP_GAMEOBJ::TILE);
+	const vector<CGameObject*>& vecTile = GetGroupObject(GROUP_GAMEOBJ::TILE);
 
 	for (UINT i = 0; i < vecTile.size(); i++)
 	{

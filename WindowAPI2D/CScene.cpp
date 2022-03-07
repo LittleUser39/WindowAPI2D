@@ -148,6 +148,8 @@ void CScene::LoadTile(const wstring& strPath)
 	fread(&xCount, sizeof(UINT), 1, pFile);
 	fread(&yCount, sizeof(UINT), 1, pFile);
 	
+	CreateTile(xCount, yCount);
+
 	const vector<CGameObject*> vecTile = GetGroupObject(GROUP_GAMEOBJ::TILE);
 
 	for (UINT i = 0; i < vecTile.size(); i++)
