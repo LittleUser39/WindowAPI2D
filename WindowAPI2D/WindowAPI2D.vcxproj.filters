@@ -49,6 +49,9 @@
     <Filter Include="Engine\Component\Animator\Animation">
       <UniqueIdentifier>{56610718-1f96-4902-b009-c5d32f860cc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Tile">
+      <UniqueIdentifier>{f38c834b-7b5f-47c3-8cfa-de1fd40c32ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -141,6 +144,9 @@
     <ClInclude Include="CCameraManager.h">
       <Filter>Engine\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="CTile.h">
+      <Filter>Object\Tile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowAPI2D.cpp">
@@ -211,6 +217,9 @@
     </ClCompile>
     <ClCompile Include="CCameraManager.cpp">
       <Filter>Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CTile.cpp">
+      <Filter>Object\Tile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
