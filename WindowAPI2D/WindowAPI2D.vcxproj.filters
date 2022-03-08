@@ -52,6 +52,9 @@
     <Filter Include="Object\Tile">
       <UniqueIdentifier>{f38c834b-7b5f-47c3-8cfa-de1fd40c32ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\UI">
+      <UniqueIdentifier>{1201b277-8458-4666-a799-fbe2ec35ceec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -147,6 +150,12 @@
     <ClInclude Include="CTile.h">
       <Filter>Object\Tile</Filter>
     </ClInclude>
+    <ClInclude Include="CUI.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIManager.h">
+      <Filter>Engine\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowAPI2D.cpp">
@@ -220,6 +229,12 @@
     </ClCompile>
     <ClCompile Include="CTile.cpp">
       <Filter>Object\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CUI.cpp">
+      <Filter>Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIManager.cpp">
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

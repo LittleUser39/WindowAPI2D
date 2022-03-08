@@ -39,6 +39,7 @@ enum class GROUP_GAMEOBJ
 	MONSTER,
 	MISSILE_PLAYER,
 
+	UI,
 	SIZE,
 };
 enum class GROUP_SCENE
