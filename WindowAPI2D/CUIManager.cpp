@@ -21,23 +21,30 @@ void CUIManager::Update()
 	{
 		CUI* pUI = (CUI*)vecUI[i];
 
-		pUI = GetTargetUI(pUI); //마우스를 올려놓은 가장 가까운 ui
-
-		if (nullptr != pUI);
+		if (pUI->IsMouseON())
 		{
 			pUI->MouseOn();
+
 			if (KEYDOWN(VK_LBUTTON))
 			{
 				pUI->MouseLbtnDown();
 				pUI->m_bLbtnDown = true;
 			}
-			else if(KEYUP(VK_LBUTTON))
+			else if (KEYUP(VK_LBUTTON))
 			{
 				pUI->MouseLbtnUp();
+
 				if (pUI->m_bLbtnDown)
 				{
 					pUI->MouseLbtnClick();
 				}
+				pUI->m_bLbtnDown = false;
+			}
+		}
+		else
+		{
+			if (KEYUP(VK_LBUTTON))
+			{
 				pUI->m_bLbtnDown = false;
 			}
 		}
