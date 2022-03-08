@@ -89,7 +89,7 @@ enum  class TYPE_BRUSH
 #include "CCollisionManager.h"
 #include "CEventManager.h"
 #include "CCameraManager.h"
-
+#include "CUIManager.h"
 //========================================
 //## 디파인 매크로						##
 //========================================

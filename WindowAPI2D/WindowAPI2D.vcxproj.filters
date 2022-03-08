@@ -156,6 +156,12 @@
     <ClInclude Include="CUIManager.h">
       <Filter>Engine\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="CButtonUI.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CPanelUI.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowAPI2D.cpp">
@@ -235,6 +241,12 @@
     </ClCompile>
     <ClCompile Include="CUIManager.cpp">
       <Filter>Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CButtonUI.cpp">
+      <Filter>Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CPanelUI.cpp">
+      <Filter>Object\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
