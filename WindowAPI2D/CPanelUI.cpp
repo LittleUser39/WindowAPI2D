@@ -21,7 +21,7 @@ void CPanelUI::MouseOn()
 {
 	if (IsLbtnDown())//내가 마우스를 잡고있는 상황
 	{
-		fPoint fptDiff = MousePos() = m_fptDragStart;
+		fPoint fptDiff = MousePos() - m_fptDragStart;
 
 		fPoint fptCurPos = GetPos();
 		fptCurPos += fptDiff;

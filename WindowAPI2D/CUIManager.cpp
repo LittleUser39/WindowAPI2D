@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "CUIManager.h"
 #include "CUI.h"
+#include "CScene.h"
 
 CUIManager::CUIManager()
 {
@@ -21,10 +22,11 @@ void CUIManager::Update()
 	{
 		CUI* pUI = (CUI*)vecUI[i];
 
-		if (pUI->IsMouseON())
+		pUI = GetTargetUI(pUI);	
+
+		if (nullptr != pUI)
 		{
 			pUI->MouseOn();
-
 			if (KEYDOWN(VK_LBUTTON))
 			{
 				pUI->MouseLbtnDown();
@@ -33,18 +35,10 @@ void CUIManager::Update()
 			else if (KEYUP(VK_LBUTTON))
 			{
 				pUI->MouseLbtnUp();
-
 				if (pUI->m_bLbtnDown)
 				{
 					pUI->MouseLbtnClick();
 				}
-				pUI->m_bLbtnDown = false;
-			}
-		}
-		else
-		{
-			if (KEYUP(VK_LBUTTON))
-			{
 				pUI->m_bLbtnDown = false;
 			}
 		}
@@ -79,7 +73,7 @@ CUI* CUIManager::GetTargetUI(CUI* pParentUI)
 		}
 
 		const vector<CUI*>& vecChild = pUI->GetChildUI();
-		for (size_t i = 0; i < vecChild.size(); ++i)
+		for (UINT i = 0; i < vecChild.size(); i++)
 		{
 			queue.push_back(vecChild[i]);
 		}

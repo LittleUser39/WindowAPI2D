@@ -60,15 +60,14 @@ void CScene_Tool::Enter()
 	ShowWindow(m_hWnd, SW_SHOW);
 
 	// UI 생성
-	CPanelUI* pPanelUI = new CPanelUI();
-	pPanelUI->SetScale(fPoint(200.f, 80.f));
-	pPanelUI->SetPos(fPoint(WINSIZEX / 2.f, WINSIZEY / 2.f));		// UI는 카메라의 위치와 상관없이 절대 좌표를 통해 구현
+	CUI* pPanelUI = new CPanelUI();
+	pPanelUI->SetScale(fPoint(200.f, 200.f));
+	pPanelUI->SetPos(fPoint(WINSIZEX/2.f,WINSIZEY/2.f));		// UI는 카메라의 위치와 상관없이 절대 좌표를 통해 구현
 	AddObject(pPanelUI, GROUP_GAMEOBJ::UI);
 
-	CButtonUI* pButtonUI = new CButtonUI();
+	CUI* pButtonUI = new CButtonUI();
 	pButtonUI->SetScale(fPoint(100.f, 40.f));
 	pButtonUI->SetPos(fPoint(10.f, 10.f));
-	pButtonUI->SetClickCallBack(test, 0, 0);
 	pPanelUI->AddChild(pButtonUI);
 }
 

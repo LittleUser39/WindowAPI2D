@@ -28,11 +28,13 @@ public:
 	void Render_Child(HDC hDc);
 	void finalUpdate_Child();
 
-	virtual void MouseOn();
+	//여기는 행동
+	virtual void MouseOn();				
 	virtual void MouseLbtnDown();
 	virtual void MouseLbtnUp();
 	virtual void MouseLbtnClick();
 
+	
 	void SetCameraAffected(bool affected);
 	fPoint GetFinalPos();
 	CUI* GetParent();

@@ -12,7 +12,7 @@ CUI::CUI()
 
 }
 
-CUI::CUI(const CUI& other) :CGameObject(other)
+CUI::CUI(const CUI& other) :CGameObject(other)	//부모의 복사생성자를 지목
 {
 	m_pParentUI = nullptr;
 	m_bLbtnDown = false;
@@ -59,7 +59,7 @@ void CUI::finalUpdate()
 
 void CUI::Render(HDC hDc)
 {
-	fPoint fptPos = GetPos();
+	fPoint fptPos = GetFinalPos();
 	fPoint fptScale = GetScale();
 
 	if (m_bCameraAffected)//카메라 영향을 받으면 렌더링 좌표를 카메라 기준으로 해줘서 그림
@@ -79,10 +79,10 @@ void CUI::Render(HDC hDc)
 	else
 	{
 		Rectangle(hDc,
-			(int)(m_fptFinalPos.x),
-			(int)(m_fptFinalPos.y),
-			(int)(m_fptFinalPos.x + fptScale.x),
-			(int)(m_fptFinalPos.y + fptScale.y));
+			(int)(fptPos.x),
+			(int)(fptPos.y),
+			(int)(fptPos.x + fptScale.x),
+			(int)(fptPos.y + fptScale.y));
 
 	}
 	
@@ -192,8 +192,8 @@ void CUI::MouseOnCheck()
 	{
 		fptMousePos = CCameraManager::getInst()->GetRealPos(fptMousePos);
 	}
-	if (m_fptFinalPos.x <= fptMousePos.x && fptMousePos.x <= m_fptFinalPos.x + fptScale.x &&
-		m_fptFinalPos.y <= fptMousePos.y && fptMousePos.y <= m_fptFinalPos.y + fptScale.y)
+	if (m_fptFinalPos.x <= fptMousePos.x && fptMousePos.x <= m_fptFinalPos.x + fptScale.x 
+		&& m_fptFinalPos.y <= fptMousePos.y && fptMousePos.y <= m_fptFinalPos.y + fptScale.y)
 	{
 		m_bMouseOn = true;
 	}
