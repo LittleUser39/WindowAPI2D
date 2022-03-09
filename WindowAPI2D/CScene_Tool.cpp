@@ -76,6 +76,7 @@ void CScene_Tool::Exit()
 {
 	EndDialog(m_hWnd, IDOK);
 	DeleteGroup(GROUP_GAMEOBJ::TILE);
+	DeleteGroup(GROUP_GAMEOBJ::UI); //일단 다시 툴 장면에 들어가면 ui가 복사되서 넣어줘봤음 나중에 지울것
 }
 
 void CScene_Tool::SetIdx(UINT idx)
@@ -206,7 +207,7 @@ INT_PTR CALLBACK TileWinProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 		}
 		else if (LOWORD(wParam) == IDCLOAD)
 		{
-			//todo 불러오기
+			//불러오기
 			CScene* pCurScen = CSceneManager::getInst()->GetCurScene();
 
 			CScene_Tool* pToolScene = dynamic_cast<CScene_Tool*>(pCurScen); //<>안에 있는 것이 변환이 가능하다 변환, 불가능 그냥 nullptr을 주는 함수
@@ -218,7 +219,7 @@ INT_PTR CALLBACK TileWinProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 		}
 		else if (LOWORD(wParam) == IDOK2)
 		{
-			//todo 입력한 크기로다가 타일 갯수를 세팅
+			//입력한 크기로다가 타일 갯수를 세팅
 			int x = GetDlgItemInt(hDlg, IDC_EDIT1, nullptr, false);
 			int y = GetDlgItemInt(hDlg, IDC_EDIT2, nullptr, false);
 
@@ -261,6 +262,11 @@ INT_PTR CALLBACK TileWinProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 				(int)(iCurRow * CTile::SIZE_TILE),
 				SRCCOPY);
 			pToolScene->SetIdx(index);
+		}
+		else if (LOWORD(wParam) == IDCANCEL)
+		{
+			EndDialog(hDlg, LOWORD(wParam));
+			return (INT_PTR)TRUE;
 		}
 		break;
 	}
