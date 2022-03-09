@@ -61,6 +61,15 @@ void CCameraManager::SetTargetobj(CGameObject* target)
 	m_pTargetobj = target;
 }
 
+void CCameraManager::Scroll(fVec2 vec, float velocity)
+{
+	m_fptLookAt = m_fptLookAt + vec * velocity * fDT;
+	m_fptCurLookAt = m_fptCurLookAt + vec * velocity * fDT;
+
+	fPoint fptCenter = fPoint(WINSIZEX / 2.f, WINSIZEY / 2.f);
+	m_fptDiff = m_fptCurLookAt - fptCenter;
+}
+
 fPoint CCameraManager::GetLookAt()
 {
 	return m_fptLookAt;

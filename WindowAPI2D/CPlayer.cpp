@@ -99,7 +99,7 @@ void CPlayer::Update()
 
 void CPlayer::Render(HDC hDc)
 {
-	//todo 플레이어 그림 그리기
+	//플레이어 그림 그리기
 	int width = m_pTex->GetBmpWidth();
 	int height = m_pTex->GetBmpHeight();
 

@@ -34,10 +34,12 @@ using namespace std;
 enum class GROUP_GAMEOBJ
 {
 	DEFAULT,
+	TILE,
 	PLAYER,
 	MONSTER,
 	MISSILE_PLAYER,
 
+	UI,
 	SIZE,
 };
 enum class GROUP_SCENE
@@ -87,7 +89,7 @@ enum  class TYPE_BRUSH
 #include "CCollisionManager.h"
 #include "CEventManager.h"
 #include "CCameraManager.h"
-
+#include "CUIManager.h"
 //========================================
 //## 디파인 매크로						##
 //========================================

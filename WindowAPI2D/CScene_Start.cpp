@@ -32,10 +32,11 @@ void CScene_Start::Update()
 
 void CScene_Start::Enter()
 {
-	//배경추가
-	
-	
-	
+	//맵 불러오기
+	wstring path = CPathManager::getInst()->GetContentPath();
+	path += L"\\tile\\test.tile";
+	LoadTile(path);
+
 	//player 추가
 	Mario* pMario = new Mario;
 	pMario->SetPos(fPoint(100, 650));
@@ -63,4 +64,5 @@ void CScene_Start::Exit()
 {
 	DeleteAll();
 	
+	CCollisionManager::getInst()->Reset();
 }
