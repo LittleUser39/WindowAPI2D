@@ -49,7 +49,9 @@ void CScene_Start::Enter()
 	wstring path = CPathManager::getInst()->GetContentPath();
 	path += L"\\tile\\test.tile";
 	LoadTile(path);
+	CPlayer* pPlayer = new CPlayer;
 
+	pPlayer->SetPos(fPoint(WINSIZEX / 2, 900));
 	AddObject(pPlayer, GROUP_GAMEOBJ::PLAYER);
 
 	//monster Ãß°¡
