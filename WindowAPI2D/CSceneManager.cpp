@@ -2,6 +2,7 @@
 #include "CSceneManager.h"
 #include "CScene_Start.h"
 #include "CScene_STAGE_01.h"
+#include "CScene_Tool.h"
 CSceneManager::CSceneManager()
 {
 	//모든 장면 처음 초기화
@@ -27,14 +28,9 @@ CSceneManager::~CSceneManager()
 
 void CSceneManager::ChangeScene(GROUP_SCENE type)
 {
-	//다음 장면이 자신이면 그냥 리턴
-	if (m_arrScene[(int)type] == m_pCurScene)
-		return;
-	//현재 장면을 나가고 현재장면을 다음 장면으로 해준후 현재장면에 들어감
 	m_pCurScene->Exit();
-	m_pCurScene = m_arrScene[(int)type];
+	m_pCurScene = m_arrScene[(UINT)type];
 	m_pCurScene->Enter();
-	//장변 변경
 }
 
 void CSceneManager::Init()
@@ -46,6 +42,10 @@ void CSceneManager::Init()
 	//일단 스테이지 01 추가해봄
 	m_arrScene[(int)GROUP_SCENE::STAGE_01] = new CScene_STAGE_01;
 	m_arrScene[(int)GROUP_SCENE::STAGE_01]->SetName(L"STAGE_01");
+
+	m_arrScene[(int)GROUP_SCENE::TOOL] = new CScene_Tool;
+	m_arrScene[(int)GROUP_SCENE::TOOL]->SetName(L"TOOL_SCENE");
+
 
 	m_pCurScene = m_arrScene[(int)GROUP_SCENE::START];
 	m_pCurScene->Enter();

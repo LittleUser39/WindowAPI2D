@@ -19,15 +19,16 @@ void CCollisionManager::CollisionGroupUpdate(GROUP_GAMEOBJ objLeft, GROUP_GAMEOB
 	CScene* pCurScene = CSceneManager::getInst()->GetCurScene();		//현재장면에서 충돌 확인
 
 	const vector<CGameObject*>& vecLeft = pCurScene->GetGroupObject(objLeft); //현재장면의 왼쪽오브젝트 를 모두 갖는 벡터 
-	const vector<CGameObject*>& vecRight = pCurScene->GetGroupObject(objRight); //현재장면의 왼쪽오브젝트 를 모두 갖는 벡터 
+	const vector<CGameObject*>& vecRight = pCurScene->GetGroupObject(objRight); //현재장면의 오른쪽오브젝트 를 모두 갖는 벡터 
 	
 	for (int i = 0; i < vecLeft.size(); i++)
 	{
 		//충돌체 컴포넌트가 없는 경우 무시
 		if (nullptr == vecLeft[i]->GetCollider())
 			continue;
-		for (int j = 0; j < vecRight.size(); j++)
-		{
+		for (int j = 0; j < vecRight.size(); j++)	//오른쪽 오브젝트 만큼 반복
+		{	
+			//충돌체 컴포넌트가 없는 경우 무시
 			if (nullptr == vecRight[j]->GetCollider())
 				continue;
 			//자기자신과의 충돌 무시
@@ -55,24 +56,45 @@ void CCollisionManager::CollisionGroupUpdate(GROUP_GAMEOBJ objLeft, GROUP_GAMEOB
 				//prev 0,cur 0 이전 프레임에 충돌 했는지 안했는지 
 				if (iter->second)
 				{
-					//이전과 현재 충돌 - 충돌중 vecleft[i]-충돌중, vecright[j]-충돌중
-				
-					vecLeft[i]->GetCollider()->OnCollision(vecRight[j]->GetCollider());
-					vecRight[j]->GetCollider()->OnCollision(vecLeft[i]->GetCollider());
-					iter->second = true;
+					//충돌체 중 하나가 dead 상태라면 충돌 해제
+					if (vecLeft[i]->isDead() || vecRight[j]->isDead())
+					{
+						vecLeft[i]->GetCollider()->OnCollisionExit(vecRight[j]->GetCollider());
+						vecRight[j]->GetCollider()->OnCollisionExit(vecLeft[i]->GetCollider());
+						iter->second = false;
+					}
+					else
+					{
+						//이전과 현재 충돌 - 충돌중 vecleft[i]-충돌중, vecright[j]-충돌중
+						vecLeft[i]->GetCollider()->OnCollision(vecRight[j]->GetCollider());
+						vecRight[j]->GetCollider()->OnCollision(vecLeft[i]->GetCollider());
+						iter->second = true;
+
+					}
 				}
 				//prev x,cur 0
 				else
-				{
-					//이전 충돌 안함, 지금 충돌(현재) - 충돌 진입
-					
-					vecLeft[i]->GetCollider()->OnCollisionEnter(vecRight[j]->GetCollider());
-					vecRight[j]->GetCollider()->OnCollisionEnter(vecLeft[i]->GetCollider());
-					iter->second = true;
+				{	
+					//충돌체 중 하나가 dead 상태라면 충돌 시키지 않음
+					if (vecLeft[i]->isDead() || vecRight[j]->isDead())
+					{
+							//아무것도 하지않음
+						iter->second = false;
+					}
+					else
+					{
+						//이전 충돌 안함, 지금 충돌(현재) - 충돌 진입
+						vecLeft[i]->GetCollider()->OnCollisionEnter(vecRight[j]->GetCollider());
+						vecRight[j]->GetCollider()->OnCollisionEnter(vecLeft[i]->GetCollider());
+						iter->second = true;
+
+					}
 				}
 			}
-			else//충돌안함
-			{	//prev 0, cur x
+			else
+			{	
+				//충돌안함
+				//prev 0, cur x
 				if (iter->second)
 				{
 					// 이전에 충돌 지금 충돌 안함 - 충돌 해제
@@ -94,6 +116,20 @@ void CCollisionManager::CollisionGroupUpdate(GROUP_GAMEOBJ objLeft, GROUP_GAMEOB
 
 bool CCollisionManager::IsCollision(CCollider* pLeftColl, CCollider* pRightColl) //충돌 여부를 확인하는함수 (현재 충돌중이다)
 {
+	//두 사각형의 중심에서 부터 끝까지의 거리를 더한값을 기준으로 거리가 크면 충돌x 거리가 작으면 충돌 o
+	//사각충돌
+	fPoint fptLeftPos = pLeftColl->GetFinalPos();
+	fPoint fptLeftScale = pLeftColl->GetScale();
+	
+	fPoint fptRightPos = pRightColl->GetFinalPos();
+	fPoint fptRightScale = pRightColl->GetScale();
+
+	if (abs(fptLeftPos.x - fptRightPos.x) < (fptLeftScale.x + fptRightScale.x)/2.f	//이거 scale을 pos로 해서 오류가났음 이제 해결함
+		&& abs(fptLeftPos.y - fptRightPos.y) < (fptLeftScale.y + fptRightScale.y) / 2.f) 
+	{
+		return true;
+	}
+
 	return false;
 }
 
@@ -102,16 +138,16 @@ void CCollisionManager::init()
 
 }
 
-void CCollisionManager::UPdate()
+void CCollisionManager::Update()
 {
-	for (int iRow = 0; iRow < (UINT)GROUP_GAMEOBJ::SIZE; iRow++)
+	for (UINT iRow = 0; iRow < (UINT)GROUP_GAMEOBJ::SIZE; iRow++)
 	{
-		for (int iCol = 0; iCol < (UINT)GROUP_GAMEOBJ::SIZE; iCol++)
+		for (UINT iCol = iRow; iCol < (UINT)GROUP_GAMEOBJ::SIZE; iCol++)
 		{
-			if (m_arrCheck[iRow] & (1 << iCol));
+			if (m_arrCheck[iRow] & (1 << iCol))
 			{
-				// 충돌을 검사하는 두그룹
-				CollisionGroupUpdate((GROUP_GAMEOBJ)iRow, (GROUP_GAMEOBJ)iCol);	
+				// 충돌을 검사해야하는 두 그룹
+				CollisionGroupUpdate((GROUP_GAMEOBJ)iRow, (GROUP_GAMEOBJ)iCol);
 			}
 		}
 	}

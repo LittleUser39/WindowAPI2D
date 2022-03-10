@@ -8,6 +8,8 @@ CCore::CCore()
 	m_hDC = 0;
 	m_hBMP = 0;
 	m_hMemDC = 0;
+	m_arrPen[0] = 0;
+	m_arrBrush[0] = 0;
 }
 
 CCore::~CCore()
@@ -26,12 +28,15 @@ CCore::~CCore()
 
 void CCore::update()
 {
-	
+	CEventManager::getInst()->Update();
+
 	CTimeManager::getInst()->update();
 	CKeyManager::getInst()->Update(); //여기서 키를 받아서 정확히 누른 시간에 키를 받아 움직임
 	CSceneManager::getInst()->Update();
-	CCollisionManager::getInst()->UPdate();
-	
+	CCollisionManager::getInst()->Update();
+	CCameraManager::getInst()->Update();
+	CUIManager::getInst()->Update();
+	CSoundManager::getInst()->Update();
 }
 
 void CCore::render()
@@ -58,7 +63,7 @@ void CCore::init()
 	CKeyManager::getInst()->Init();
 	CSceneManager::getInst()->Init();
 	CCollisionManager::getInst()->init();
-
+	CSoundManager::getInst()->init();
 	createBrushPen();
 
 	m_hDC = GetDC(hWnd);
@@ -93,7 +98,7 @@ HPEN CCore::GetPen(TYPE_PEN pen)
 	return m_arrPen[(int)pen];
 }
 
-HBRUSH CCore::GetABrush(TYPE_BRUSH brush)
+HBRUSH CCore::GetBrush(TYPE_BRUSH brush)
 {
 	return m_arrBrush[(int)brush];
 }

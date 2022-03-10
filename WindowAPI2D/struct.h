@@ -35,37 +35,44 @@ struct fPoint	//좌표에 관한 값
 	{
 		return fPoint(x + other.x, y + other.y);
 	}
+	
+	fPoint operator+=(const fPoint& other)
+	{
+		this->x += other.x;
+		this->y += other.y;
+		return *this;
+	}
 
 	fPoint operator-(const fPoint& other)
 	{
 		return fPoint(x - other.x, y - other.y);
 	}
-};
-
-struct fVec2	//방향성이 필요 - 방향성에 관한 값
-{
-	float x;
-	float y;
-
-	fVec2()
+	template<typename T> 
+	fPoint operator*(T num)
 	{
-		x = 0;
-		y = 0;
+		return fPoint(x * num, y * num);
 	}
-
-	fVec2(float x, float y)
+	template<typename T>
+	fPoint operator/(T num)
 	{
-		this->x = x;
-		this->y = y;
+		assert(0 != num);
+		return fPoint(x / num, y / num);
 	}
-
-	fVec2 Nomarlize()
+	fPoint Nomarlize()
 	{
 		float z = sqrt(x * x + y * y);
-		
+
 		x = x / z;
 		y = y / z;
 
 		return *this;
 	}
+
+	float Length()
+	{
+		return	sqrt(x * x + y * y);
+	}
 };
+typedef iPoint iVec2;
+typedef fPoint fVec2;
+

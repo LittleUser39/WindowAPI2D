@@ -1,6 +1,9 @@
 #include "framework.h"
 #include "CMonster.h"
+#include "CTexture.h"
 #include "CCollider.h"
+#include "CAnimation.h"
+#include "CAnimator.h"
 
 CMonster::CMonster()
 {
@@ -8,6 +11,7 @@ CMonster::CMonster()
 	m_fVelocity = 300;	//움직일 속도
 	m_fDistance = 200;	//움직일 거리
 	m_bIsUpDir	= true;
+	
 
 	CreateCollider();
 	GetCollider()->SetScale(fPoint(200, 200));
@@ -15,7 +19,15 @@ CMonster::CMonster()
 
 CMonster::~CMonster()
 {
+
 }
+
+CMonster* CMonster::Clone()
+{
+	return new CMonster(*this);
+}
+
+
 
 void CMonster::Update() //여기가 몬스터 행동에 관한것
 {
@@ -35,6 +47,8 @@ void CMonster::Update() //여기가 몬스터 행동에 관한것
 	}
 
 	SetPos(pos);
+
+	GetAnimator()->Update();
 }
 
 void CMonster::SetCenterPos(fPoint point)
@@ -42,7 +56,35 @@ void CMonster::SetCenterPos(fPoint point)
 	m_fptCenterPos = point;
 }
 
+void CMonster::Render(HDC hDc)
+{
+	int width = m_pTex->GetBmpWidth();
+	int height = m_pTex->GetBmpHeight();
+
+	/*TransparentBlt(hDc,
+		(int)(GetPos().x - (float)(width / 2)),
+		(int)(GetPos().y - (float)(height / 2)),
+		width, height,
+		m_pTex->GetDC(),
+		0, 0, width, height,
+		RGB(255, 0, 255));*/
+	
+	component_render(hDc);
+}
+
 fPoint CMonster::GetCenterPos()
 {
 	return m_fptCenterPos;
+}
+
+void CMonster::OnCollision(CCollider* pOther)
+{
+}
+
+void CMonster::OnCollisionEnter(CCollider* pOther)
+{
+}
+
+void CMonster::OnCollisionExit(CCollider* pOther)
+{
 }
