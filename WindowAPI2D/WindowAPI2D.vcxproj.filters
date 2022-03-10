@@ -168,6 +168,12 @@
     <ClInclude Include="Mario.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="CSound.h">
+      <Filter>Resource\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="CSoundManager.h">
+      <Filter>Engine\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowAPI2D.cpp">
@@ -259,6 +265,12 @@
     </ClCompile>
     <ClCompile Include="Mario.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CSound.cpp">
+      <Filter>Resource\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoundManager.cpp">
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

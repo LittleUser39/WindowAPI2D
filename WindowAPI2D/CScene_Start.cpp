@@ -3,8 +3,9 @@
 #include "CGameObject.h"
 #include "CPlayer.h"
 #include "CMonster.h"
-#include"CBackGround.h"
+#include "CBackGround.h"
 #include "Mario.h"
+#include "CSound.h"
 CScene_Start::CScene_Start()
 {
 
@@ -14,6 +15,8 @@ CScene_Start::~CScene_Start()
 {
 	
 }
+
+CSound* pSound;
 
 void CScene_Start::Update()
 {
@@ -27,6 +30,16 @@ void CScene_Start::Update()
 	{
 		fPoint fptLookAt = CCameraManager::getInst()->GetRealPos(MousePos());
 		CCameraManager::getInst()->SetLookAt(fptLookAt);
+	}
+	if (KEYDOWN('Z'))
+	{
+		pSound = new CSound;
+		pSound->Load(L"content\\sound\\th06_01.wav");
+		
+	}
+	if (KEYDOWN('C'))
+	{
+		pSound->Play();
 	}
 }
 

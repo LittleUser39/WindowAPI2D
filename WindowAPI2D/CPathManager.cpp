@@ -35,3 +35,8 @@ const wchar_t* CPathManager::GetContentPath()
 {
 	return	m_szContentPath;
 }
+
+const wchar_t* CPathManager::GetRelativeContentPath()
+{
+	return L"..\\Release\\content\\";
+}

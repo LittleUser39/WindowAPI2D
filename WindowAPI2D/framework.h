@@ -90,6 +90,7 @@ enum  class TYPE_BRUSH
 #include "CEventManager.h"
 #include "CCameraManager.h"
 #include "CUIManager.h"
+#include "CSoundManager.h"
 //========================================
 //## 디파인 매크로						##
 //========================================

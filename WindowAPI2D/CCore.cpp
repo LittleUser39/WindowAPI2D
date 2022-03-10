@@ -36,6 +36,7 @@ void CCore::update()
 	CCollisionManager::getInst()->Update();
 	CCameraManager::getInst()->Update();
 	CUIManager::getInst()->Update();
+	CSoundManager::getInst()->Update();
 }
 
 void CCore::render()
@@ -62,7 +63,7 @@ void CCore::init()
 	CKeyManager::getInst()->Init();
 	CSceneManager::getInst()->Init();
 	CCollisionManager::getInst()->init();
-
+	CSoundManager::getInst()->init();
 	createBrushPen();
 
 	m_hDC = GetDC(hWnd);
