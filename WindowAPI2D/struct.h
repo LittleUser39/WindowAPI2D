@@ -60,17 +60,17 @@ struct fPoint	//좌표에 관한 값
 	}
 	fPoint Nomarlize()
 	{
-		float z = sqrt(x * x + y * y);
+		float length = (float)sqrt((double)x * x + (double)y * y);
 
-		x = x / z;
-		y = y / z;
+		x = x / length;
+		y = y / length;
 
 		return *this;
 	}
 
 	float Length()
 	{
-		return	sqrt(x * x + y * y);
+		return (float)sqrt((double)x * x + (double)y * y);
 	}
 };
 typedef iPoint iVec2;
