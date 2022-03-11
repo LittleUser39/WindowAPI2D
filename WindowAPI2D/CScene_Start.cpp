@@ -33,17 +33,17 @@ void CScene_Start::Update()
 	}
 	if (KEYDOWN('Z'))
 	{
-		pSound = new CSound;
-		pSound->Load(L"content\\sound\\th06_01.wav");
+		CSoundManager::getInst()->AddSound(L"BGM_1", L"sound\\th06_01.wav", false);
+		CSoundManager::getInst()->Play(L"BGM_1");
 		
 	}
 	if (KEYDOWN('C'))
 	{
-		pSound->Play();
+		
 	}
 }
 
-void CScene_Start::Enter()
+void CScene_Start::Enter() //이 장면에 필요한 것들을 전부 넣어줌
 {
 	//맵 불러오기
 	wstring path = CPathManager::getInst()->GetContentPath();
@@ -71,6 +71,8 @@ void CScene_Start::Enter()
 
 	//카메라 기본 시작시 화면 중간으로설정
 	CCameraManager::getInst()->SetLookAt(fPoint(WINSIZEX / 2.f, WINSIZEY / 2.f));
+	
+	
 }
 
 void CScene_Start::Exit()

@@ -32,11 +32,11 @@ void CCore::update()
 
 	CTimeManager::getInst()->update();
 	CKeyManager::getInst()->Update(); //여기서 키를 받아서 정확히 누른 시간에 키를 받아 움직임
+	CSoundManager::getInst()->Update();
 	CSceneManager::getInst()->Update();
 	CCollisionManager::getInst()->Update();
 	CCameraManager::getInst()->Update();
 	CUIManager::getInst()->Update();
-	CSoundManager::getInst()->Update();
 }
 
 void CCore::render()
@@ -61,9 +61,10 @@ void CCore::init()
 	CPathManager::getInst()->init(); //순서 - 이미지를 불러와서 씬에서 사용해야함
 	CTimeManager::getInst()->init();
 	CKeyManager::getInst()->Init();
+	CSoundManager::getInst()->init();
 	CSceneManager::getInst()->Init();
 	CCollisionManager::getInst()->init();
-	CSoundManager::getInst()->init();
+	
 	createBrushPen();
 
 	m_hDC = GetDC(hWnd);
