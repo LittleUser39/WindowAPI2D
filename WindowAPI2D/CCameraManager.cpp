@@ -1,23 +1,27 @@
 #include "framework.h"
 #include "CCameraManager.h"
 #include "CGameObject.h"
-
+#include "CTexture.h"
 CCameraManager::CCameraManager()
 {
-	m_fptLookAt	 = {};
+	m_fptLookAt = fPoint(WINSIZEX / 2.f, WINSIZEY / 2.f);
+	m_fptCurLookAt = m_fptLookAt;
+	m_fptPrevLookAt = m_fptLookAt;
 	m_pTargetobj = nullptr;
-	m_fTime		 = 2.f;
-	m_fAccTime	 = m_fTime;
-	m_fSpeed	 = 0;
-	m_fPreSpeed	 = 0;
-	m_fAccel	 = 0;
-	m_fAccDir	 = 1.f;
+	m_fAccTime = m_fTime;
+	m_fSpeed = 0;
 
+	
 }
 
 CCameraManager::~CCameraManager()
 {
 	
+}
+
+void CCameraManager::init()
+{
+	m_pTex = CResourceManager::getInst()->CreateTexture(L"CameraTex", WINSIZEX, WINSIZEY);
 }
 
 void CCameraManager::Update()
@@ -36,6 +40,47 @@ void CCameraManager::Update()
 	
 	//화면 중앙과 카메라 lookat 좌표 사이 차이 계산
 	CalDiff();
+}
+
+void CCameraManager::Render(HDC hDc)
+{
+
+	if (CAM_EFFECT::NONE == m_eEffect)
+		return;
+	m_fCurTime += fDT;
+	if (m_fEffectDuration < m_fCurTime)
+	{
+		m_eEffect = CAM_EFFECT::NONE;
+		return;
+	}
+	float fRatio = m_fCurTime / m_fEffectDuration;
+	int iAlpha;
+
+	if (CAM_EFFECT::FADE_OUT == m_eEffect)
+	{
+		iAlpha = (int)(255.f * fRatio);
+	}
+	else if (CAM_EFFECT::FADE_IN==m_eEffect)
+	{
+		iAlpha = (int)(255.f * (1.f - fRatio));
+	}
+
+	BLENDFUNCTION bf = {};
+
+	bf.BlendOp = AC_SRC_OVER;
+	bf.BlendFlags = 0;
+	bf.AlphaFormat = 0;
+	bf.SourceConstantAlpha = iAlpha;
+
+	AlphaBlend(hDc
+		, 0, 0
+		, (int)(m_pTex->GetBmpWidth())
+		, (int)(m_pTex->GetBmpHeight())
+		, m_pTex->GetDC()
+		, 0, 0
+		, (int)(m_pTex->GetBmpWidth())
+		, (int)(m_pTex->GetBmpHeight())
+		, bf);
 }
 
 void CCameraManager::SetLookAt(fPoint lookat)
@@ -68,6 +113,20 @@ void CCameraManager::Scroll(fVec2 vec, float velocity)
 
 	fPoint fptCenter = fPoint(WINSIZEX / 2.f, WINSIZEY / 2.f);
 	m_fptDiff = m_fptCurLookAt - fptCenter;
+}
+
+void CCameraManager::FadeIn(float duration)
+{
+	m_eEffect = CAM_EFFECT::FADE_IN;
+	m_fEffectDuration = duration;
+	m_fCurTime = 0;
+}
+
+void CCameraManager::FadeOut(float duration)
+{
+	m_eEffect = CAM_EFFECT::FADE_OUT;
+	m_fEffectDuration = duration;
+	m_fCurTime = 0;
 }
 
 fPoint CCameraManager::GetLookAt()

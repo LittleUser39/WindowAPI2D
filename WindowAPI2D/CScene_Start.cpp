@@ -71,6 +71,7 @@ void CScene_Start::Enter() //이 장면에 필요한 것들을 전부 넣어줌
 
 	//카메라 기본 시작시 화면 중간으로설정
 	CCameraManager::getInst()->SetLookAt(fPoint(WINSIZEX / 2.f, WINSIZEY / 2.f));
+	CCameraManager::getInst()->FadeIn(2.f);
 	
 	
 }

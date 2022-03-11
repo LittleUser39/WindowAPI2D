@@ -5,10 +5,9 @@ class CScene;
 
 class CSceneManager
 {
+	SINGLETON(CSceneManager);
 	
 	friend class CEventManager;
-
-	SINGLETON(CSceneManager);
 
 private:
 	CScene* m_arrScene[(int)GROUP_SCENE::SIZE]; //장면(scene)을 저장할 배열

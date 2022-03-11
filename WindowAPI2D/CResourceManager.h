@@ -15,6 +15,8 @@ public:
 	CTexture* FindTexture(const wstring& strKey); //텍스쳐 찾기
 	CTexture* LoadTexture(const wstring& strKey, const wstring& strPath); //텍스쳐 로드
 
+	CTexture* CreateTexture(const wstring& strKey, UINT width, UINT height);
+
 	CSound* FindSound(const wstring& strkey);
 	CSound* LoadSound(const wstring& strkey, const wstring& strRelativePath);
 

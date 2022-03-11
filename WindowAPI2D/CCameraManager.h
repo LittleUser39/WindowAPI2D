@@ -1,4 +1,15 @@
 #pragma once
+class CGameObject;
+class CTexture;
+
+enum class CAM_EFFECT
+{
+	FADE_IN,
+	FADE_OUT,
+
+
+	NONE,
+};
 class CCameraManager
 {
 	SINGLETON(CCameraManager);
@@ -18,15 +29,23 @@ private:
 	float m_fAccel;				//목적지를 따라가는 가속도
 	float m_fAccDir;			//가속도의 증가폭
 
+	CAM_EFFECT m_eEffect;
+	CTexture* m_pTex;
+	float m_fEffectDuration;
+	float m_fCurTime;
 
 	void CalDiff();
 public:
-
+	void init();
 	void Update();
+	void Render(HDC hDc);
 
 	void SetLookAt(fPoint lookat);			//보고 있는 위치 설정
 	void SetTargetobj(CGameObject* target);	// 타겟기준으로 보기
 	void Scroll(fVec2 vec, float velocity);	//일정한속도로 보기 (움직이기)
+
+	void FadeIn(float duration);
+	void FadeOut(float duration);
 
 	fPoint GetLookAt();
 	fPoint GetRenderPos(fPoint objpos);	//카메라가 보고있는 대로 오브젝트가 그려져야함

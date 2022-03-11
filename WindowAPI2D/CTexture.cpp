@@ -55,3 +55,15 @@ void CTexture::Load(const wstring& strFillPath)
 	//비트맵 인포 추출
 	GetObject(m_hBmp, sizeof(BITMAP), &m_bmpInfo);
 }
+
+void CTexture::Create(UINT width, UINT height)
+{
+	HDC mainDC = CCore::getInst()->GetMainDC();
+	m_hBmp = CreateCompatibleBitmap(mainDC,width,height);
+	m_hDc = CreateCompatibleDC(mainDC);
+
+	HBITMAP hOldBmp = (HBITMAP)SelectObject(m_hDc, m_hBmp);
+	DeleteObject(hOldBmp);
+
+	GetObject(m_hBmp, sizeof(BITMAP), &m_bmpInfo);
+}

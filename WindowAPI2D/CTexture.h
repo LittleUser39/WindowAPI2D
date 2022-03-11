@@ -19,6 +19,6 @@ public:
 	int GetBmpHeight();
 
 	void Load(const wstring& strFillPath); //해당경로를 주면 그경로의 이미지를 로드
-
+	void Create(UINT width, UINT height);
 };
 

@@ -5,7 +5,7 @@
 #include "CScene.h"
 #include "CTexture.h"
 #include "commdlg.h"
-#include "CUI.h"	
+#include "CUI.h"
 #include "CPanelUI.h"
 #include "CButtonUI.h"
 
@@ -50,9 +50,10 @@ void CScene_Tool::Update()
 		CUIManager::getInst()->SetFocusedUI(pClonePanel);
 	SetTileIdx();
 }
-void test(DWORD_PTR param1, DWORD_PTR param2)
+
+void ChangeScene(DWORD_PTR, DWORD_PTR)
 {
-	int a = 0;
+	ChangeScn(GROUP_SCENE::START);
 }
 
 void CScene_Tool::Enter()
@@ -77,6 +78,12 @@ void CScene_Tool::Enter()
 	pClonePanel = pPanelUI->Clone();
 	pClonePanel->SetPos(pClonePanel->GetPos() + fPoint(-500.f, 0.f));
 	AddObject(pClonePanel, GROUP_GAMEOBJ::UI);
+	
+	CButtonUI* pBtnUI = new CButtonUI();
+	pBtnUI->SetScale(fPoint(100.f, 100.f));
+	pBtnUI->SetPos(fPoint(100.f, 100.f));
+	pBtnUI->SetClickCallBack(ChangeScene, 0, 0);
+	AddObject(pBtnUI, GROUP_GAMEOBJ::UI);
 
 }
 
