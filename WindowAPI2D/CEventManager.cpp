@@ -44,9 +44,8 @@ void CEventManager::Execute(const tEvent& event)
 		//change scene
 		//lparam : scene ±×·ì
 		GROUP_SCENE scene = (GROUP_SCENE)event.lparam;
+		CUIManager::getInst()->SetFocusedUI(nullptr);
 		CSceneManager::getInst()->ChangeScene(scene);
-
-
 		break;
 	}
 }

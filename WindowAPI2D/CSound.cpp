@@ -11,13 +11,9 @@ CSound::CSound()
 CSound::~CSound()
 {
 	Stop();
-	if (nullptr != m_pChannel)
-		delete m_pChannel;
-	
-	if (nullptr!=m_pSound)
+	if (nullptr != m_pSound)
 	{
 		m_pSound->release();
-		delete m_pSound;
 	}
 }
 

@@ -59,6 +59,20 @@ CTexture* CResourceManager::LoadTexture(const wstring& strKey, const wstring& st
 	return pTex;
 }
 
+CTexture* CResourceManager::CreateTexture(const wstring& strKey, UINT width, UINT height)
+{
+	CTexture* pTex = FindTexture(strKey);
+	if (nullptr != pTex)
+		return pTex;
+	pTex = new CTexture();
+	pTex->Create(width, height);
+	pTex->SetKey(strKey);
+
+	m_mapTex.insert(make_pair(strKey, pTex));
+
+	return pTex;
+}
+
 CSound* CResourceManager::FindSound(const wstring& strkey)
 {
 	map<wstring, CSound*>::iterator iter = m_mapSound.find(strkey);

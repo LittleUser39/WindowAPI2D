@@ -5,11 +5,13 @@
 #include "CScene.h"
 #include "CTexture.h"
 #include "commdlg.h"
-#include "CUI.h"	
+#include "CUI.h"
 #include "CPanelUI.h"
 #include "CButtonUI.h"
 
 INT_PTR CALLBACK TileWinProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+
+CPanelUI* pClonePanel;
 
 CScene_Tool::CScene_Tool()
 {
@@ -44,12 +46,14 @@ void CScene_Tool::Update()
 	{
 		CCameraManager::getInst()->Scroll(fVec2(0, 1), m_fVelocity);
 	}
-
+	if (KEYDOWN('K'))
+		CUIManager::getInst()->SetFocusedUI(pClonePanel);
 	SetTileIdx();
 }
-void test(DWORD_PTR param1, DWORD_PTR param2)
+
+void ChangeScene(DWORD_PTR, DWORD_PTR)
 {
-	int a = 0;
+	ChangeScn(GROUP_SCENE::START);
 }
 
 void CScene_Tool::Enter()
@@ -60,15 +64,27 @@ void CScene_Tool::Enter()
 	ShowWindow(m_hWnd, SW_SHOW);
 
 	// UI 생성
-	CUI* pPanelUI = new CPanelUI();
+	CPanelUI* pPanelUI = new CPanelUI();
 	pPanelUI->SetScale(fPoint(200.f, 200.f));
 	pPanelUI->SetPos(fPoint(WINSIZEX/2.f,WINSIZEY/2.f));		// UI는 카메라의 위치와 상관없이 절대 좌표를 통해 구현
 	AddObject(pPanelUI, GROUP_GAMEOBJ::UI);
 
-	CUI* pButtonUI = new CButtonUI();
+	CButtonUI* pButtonUI = new CButtonUI();
 	pButtonUI->SetScale(fPoint(100.f, 40.f));
 	pButtonUI->SetPos(fPoint(10.f, 10.f));
 	pPanelUI->AddChild(pButtonUI);
+
+	//패널 ui 복사
+	pClonePanel = pPanelUI->Clone();
+	pClonePanel->SetPos(pClonePanel->GetPos() + fPoint(-500.f, 0.f));
+	AddObject(pClonePanel, GROUP_GAMEOBJ::UI);
+	
+	CButtonUI* pBtnUI = new CButtonUI();
+	pBtnUI->SetScale(fPoint(100.f, 100.f));
+	pBtnUI->SetPos(fPoint(100.f, 100.f));
+	pBtnUI->SetClickCallBack(ChangeScene, 0, 0);
+	AddObject(pBtnUI, GROUP_GAMEOBJ::UI);
+
 }
 
 
